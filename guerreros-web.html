@@ -1,0 +1,2765 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GUERREROS | Burger • Broaster • Pizzas • Postres | La Grita y San Cristóbal</title>
+  <meta name="description" content="GUERREROS: Te damos lo tuyo, te damos felicidad. Pide en línea hamburguesas, pollo broaster, pizzas y platos especiales en nuestras sedes de La Grita y San Cristóbal, estado Táchira." />
+  <meta name="keywords" content="Guerreros, hamburguesas, pollo broaster, pizzas, La Grita, San Cristóbal, Táchira, pedidos online" />
+  <meta property="og:title" content="GUERREROS - Te damos lo tuyo, te damos felicidad" />
+  <meta property="og:description" content="Menú digital interactivo y pedidos directos por WhatsApp en La Grita y San Cristóbal." />
+  <meta property="og:type" content="restaurant" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            guerrero: {
+              yellow: '#FFD100',
+              yellowHover: '#E6BC00',
+              red: '#DC2626',
+              redDark: '#991B1B',
+              black: '#0A0A0A',
+              card: '#141414',
+              border: '#262626'
+            }
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0A0A0A;
+      color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    .font-display {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.04em;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0A0A0A; }
+    ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #FFD100; }
+
+    .hero-gradient {
+      background: radial-gradient(circle at 80% 20%, rgba(220, 38, 38, 0.25) 0%, rgba(255, 209, 0, 0.12) 35%, rgba(10, 10, 10, 0.98) 75%);
+    }
+    .card-hover {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      border-color: #FFD100;
+      box-shadow: 0 12px 30px -10px rgba(255, 209, 0, 0.2);
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+
+  <!-- Datos Estructurados SEO Local -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "GUERREROS",
+    "slogan": "TE DAMOS LO TUYO, TE DAMOS FELICIDAD",
+    "servesCuisine": ["Hamburguesas", "Pollo Broaster", "Pizzas", "Postres"],
+    "sameAs": ["https://www.instagram.com/guerrerosburger1/"],
+    "department": [
+      {
+        "@type": "Restaurant",
+        "name": "GUERREROS - Sede La Grita",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Calle 3, a pocos metros de la Plaza Sucre",
+          "addressLocality": "La Grita",
+          "addressRegion": "Táchira",
+          "addressCountry": "VE"
+        },
+        "telephone": "+584247273294"
+      },
+      {
+        "@type": "Restaurant",
+        "name": "GUERREROS - Sede San Cristóbal",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Korver Nivel Feria II, al final de la avenida Los Angustinos",
+          "addressLocality": "San Cristóbal",
+          "addressRegion": "Táchira",
+          "addressCountry": "VE"
+        },
+        "telephone": "+584141756383"
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-guerrero-yellow selection:text-black">
+
+  <!-- BANNER DE ESTADO DEL HORARIO Y SEDE ACTIVA -->
+  <div class="bg-guerrero-yellow text-black text-xs sm:text-sm font-bold py-2 px-4 sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span id="storeStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-black text-guerrero-yellow">
+          <span class="w-2 h-2 rounded-full bg-green-400 animate-ping"></span>
+          <span id="storeStatusText">Verificando horario...</span>
+        </span>
+        <span class="hidden md:inline text-black/80 font-semibold" id="scheduleTopText">
+          Horario: 12:00 PM a 11:00 PM (Todos los días excepto Jueves)
+        </span>
+      </div>
+      <div class="flex items-center gap-3 ml-auto">
+        <div class="flex items-center gap-1.5 bg-black/10 px-2.5 py-1 rounded-lg">
+          <i class="fa-solid fa-location-dot text-guerrero-red"></i>
+          <span>Sede actual:</span>
+          <select id="headerBranchSelect" onchange="changeSelectedBranch(this.value)" class="bg-transparent font-extrabold underline cursor-pointer focus:outline-none">
+            <option value="lagrita">La Grita</option>
+            <option value="sancristobal">San Cristóbal</option>
+          </select>
+        </div>
+        <span id="exchangeRateBanner" class="hidden sm:inline-block bg-black text-white px-2.5 py-0.5 rounded text-xs font-bold"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CABECERA PRINCIPAL -->
+  <header class="bg-guerrero-black/95 backdrop-blur-md border-b border-guerrero-border sticky top-9 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <!-- LOGO (5 toques en móvil abre acceso PIN por si no hay teclado físico) -->
+      <div id="brandLogoTrigger" onclick="handleLogoTap()" class="flex items-center gap-3 cursor-pointer select-none group">
+        <div id="logoContainer" class="w-12 h-12 rounded-xl bg-gradient-to-br from-guerrero-yellow via-guerrero-yellow to-guerrero-red p-0.5 shadow-lg shadow-guerrero-yellow/20 flex items-center justify-center overflow-hidden">
+          <img id="brandLogoImg" src="" alt="Logo GUERREROS" class="w-full h-full object-cover rounded-[10px] hidden" />
+          <div id="brandLogoFallback" class="w-full h-full bg-guerrero-black rounded-[10px] flex flex-col items-center justify-center">
+            <i class="fa-solid fa-shield-halved text-guerrero-yellow text-xl group-hover:scale-110 transition"></i>
+          </div>
+        </div>
+        <div>
+          <span id="brandNameDisplay" class="font-display text-3xl sm:text-4xl tracking-wider text-guerrero-yellow leading-none block">GUERREROS</span>
+          <span class="text-[10px] font-extrabold tracking-widest uppercase text-white/70 block -mt-1">BURGER • BROASTER • PIZZAS • POSTRES</span>
+        </div>
+      </div>
+
+      <!-- NAVEGACIÓN DESKTOP -->
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-bold text-white/80">
+        <a href="#inicio" class="hover:text-guerrero-yellow transition">Inicio</a>
+        <a href="#promociones" class="hover:text-guerrero-yellow transition">Promos</a>
+        <a href="#menu" class="hover:text-guerrero-yellow transition">Menú Digital</a>
+        <a href="#sedes" class="hover:text-guerrero-yellow transition">Sedes</a>
+        <a href="#pagos" class="hover:text-guerrero-yellow transition">Métodos de Pago</a>
+      </nav>
+
+      <!-- ACCIONES Y CARRITO -->
+      <div class="flex items-center gap-3">
+        <a id="navInstagramBtn" href="https://www.instagram.com/guerrerosburger1/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-guerrero-card border border-guerrero-border hover:border-guerrero-yellow flex items-center justify-center text-white hover:text-guerrero-yellow transition" title="Instagram Oficial @guerrerosburger1">
+          <i class="fa-brands fa-instagram text-lg"></i>
+        </a>
+
+        <button onclick="toggleCartModal(true)" class="relative flex items-center gap-2.5 bg-guerrero-yellow hover:bg-guerrero-yellowHover text-black font-extrabold px-4 py-2.5 rounded-xl shadow-lg shadow-guerrero-yellow/20 transition active:scale-95">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="hidden sm:inline text-sm">Mi Pedido</span>
+          <span id="cartCountBadge" class="bg-guerrero-red text-white text-xs font-extrabold px-2 py-0.5 rounded-full">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="flex-grow">
+
+    <!-- SECCIÓN A: HERO / PÁGINA DE INICIO -->
+    <section id="inicio" class="hero-gradient relative border-b border-guerrero-border overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 lg:py-20 grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 bg-guerrero-red/20 border border-guerrero-red/50 text-guerrero-yellow px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider">
+            <i class="fa-solid fa-fire-flame-curved text-guerrero-red"></i>
+            <span id="heroSloganBadge">TE DAMOS LO TUYO, TE DAMOS FELICIDAD</span>
+          </div>
+
+          <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-white">
+            SABOR DE VERDAD EN <span class="text-guerrero-yellow">CADA MORDISCO</span>
+          </h1>
+
+          <p id="heroDescription" class="text-white/80 text-base sm:text-lg max-w-2xl leading-relaxed">
+            Especialistas en hamburguesas con papas a la francesa, pollo broaster crujiente, pizzas artesanales y platos especiales. Selecciona tu sede en <strong>La Grita</strong> o <strong>San Cristóbal</strong> y arma tu pedido en segundos.
+          </p>
+
+          <!-- Selector rápido de sede en Hero -->
+          <div class="bg-guerrero-card/90 border border-guerrero-border p-4 rounded-2xl max-w-xl">
+            <p class="text-xs font-bold uppercase tracking-wider text-guerrero-yellow mb-2.5 flex items-center gap-2">
+              <i class="fa-solid fa-store"></i> 1. Selecciona tu sede para ver disponibilidad y ordenar:
+            </p>
+            <div class="grid grid-cols-2 gap-3">
+              <button id="heroBtnLaGrita" onclick="changeSelectedBranch('lagrita')" class="flex items-center justify-between p-3 rounded-xl border-2 transition font-bold text-left">
+                <div>
+                  <span class="block text-sm font-extrabold">Sede La Grita</span>
+                  <span class="block text-[11px] opacity-75">Calle 3, cerca Plaza Sucre</span>
+                </div>
+                <i class="fa-solid fa-circle-check text-lg"></i>
+              </button>
+              <button id="heroBtnSanCristobal" onclick="changeSelectedBranch('sancristobal')" class="flex items-center justify-between p-3 rounded-xl border-2 transition font-bold text-left">
+                <div>
+                  <span class="block text-sm font-extrabold">Sede San Cristóbal</span>
+                  <span class="block text-[11px] opacity-75">Korver Nivel Feria II</span>
+                </div>
+                <i class="fa-solid fa-circle-check text-lg"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#menu" class="bg-guerrero-yellow hover:bg-guerrero-yellowHover text-black font-extrabold px-7 py-4 rounded-xl text-base shadow-xl shadow-guerrero-yellow/20 flex items-center gap-2.5 transition transform hover:-translate-y-0.5">
+              <i class="fa-solid fa-burger"></i> Ver Menú Digital
+            </a>
+            <button onclick="toggleCartModal(true)" class="bg-guerrero-red hover:bg-guerrero-redDark text-white font-extrabold px-7 py-4 rounded-xl text-base shadow-xl shadow-guerrero-red/20 flex items-center gap-2.5 transition transform hover:-translate-y-0.5">
+              <i class="fa-brands fa-whatsapp text-xl"></i> Hacer mi Pedido
+            </button>
+          </div>
+
+          <!-- Categorías Principales de Identidad -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 pt-4 border-t border-white/10">
+            <button onclick="filterCategory('Hamburguesas'); document.getElementById('menu').scrollIntoView()" class="bg-white/5 hover:bg-guerrero-yellow hover:text-black p-3 rounded-xl text-center transition group">
+              <i class="fa-solid fa-burger text-xl text-guerrero-yellow group-hover:text-black mb-1 block"></i>
+              <span class="font-display text-lg tracking-wider block">BURGER</span>
+            </button>
+            <button onclick="filterCategory('Pollo Broaster'); document.getElementById('menu').scrollIntoView()" class="bg-white/5 hover:bg-guerrero-yellow hover:text-black p-3 rounded-xl text-center transition group">
+              <i class="fa-solid fa-drumstick-bite text-xl text-guerrero-yellow group-hover:text-black mb-1 block"></i>
+              <span class="font-display text-lg tracking-wider block">BROASTER</span>
+            </button>
+            <button onclick="filterCategory('Pizzas'); document.getElementById('menu').scrollIntoView()" class="bg-white/5 hover:bg-guerrero-yellow hover:text-black p-3 rounded-xl text-center transition group">
+              <i class="fa-solid fa-pizza-slice text-xl text-guerrero-yellow group-hover:text-black mb-1 block"></i>
+              <span class="font-display text-lg tracking-wider block">PIZZAS</span>
+            </button>
+            <button onclick="filterCategory('Postres'); document.getElementById('menu').scrollIntoView()" class="bg-white/5 hover:bg-guerrero-yellow hover:text-black p-3 rounded-xl text-center transition group">
+              <i class="fa-solid fa-ice-cream text-xl text-guerrero-yellow group-hover:text-black mb-1 block"></i>
+              <span class="font-display text-lg tracking-wider block">POSTRES</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Imagen Hero Protagonista -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-3xl overflow-hidden border-2 border-guerrero-yellow/40 shadow-2xl shadow-guerrero-red/20 bg-guerrero-card aspect-[4/4]">
+            <img id="heroMainImage" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80" alt="Hamburguesa Especial GUERREROS Fotografía Referencial" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute top-4 right-4 bg-black/80 backdrop-blur-md border border-white/15 px-3 py-1 rounded-full text-[11px] text-white/80 font-medium">
+              *Fotografía de referencia reemplazable en el Panel
+            </div>
+            <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between">
+              <div>
+                <span class="bg-guerrero-red text-white text-xs font-extrabold px-2.5 py-1 rounded-md uppercase">Favorita de la Casa</span>
+                <h2 class="font-display text-4xl text-white mt-1">HAMBURGUESA GUERRERA</h2>
+                <p class="text-xs text-white/80">Todas nuestras hamburguesas incluyen papas a la francesa</p>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-guerrero-yellow font-bold block">Precio Oficial</span>
+                <span class="font-display text-3xl text-guerrero-yellow">$37.000 COP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PROMOCIONES Y DESTACADOS EN TIEMPO REAL -->
+    <section id="promociones" class="py-10 bg-gradient-to-b from-guerrero-black to-guerrero-card border-b border-guerrero-border">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-2">
+          <div>
+            <span class="text-xs font-extrabold uppercase tracking-widest text-guerrero-red">Ofertas y Especiales Activos</span>
+            <h2 class="font-display text-4xl text-white">PROMOCIONES Y <span class="text-guerrero-yellow">MÁS VENDIDOS</span></h2>
+          </div>
+          <p class="text-xs text-white/60">Actualizado en tiempo real por la administración de GUERREROS</p>
+        </div>
+
+        <div id="promotionsContainer" class="grid md:grid-cols-3 gap-5">
+          <!-- Renderizado dinámico -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN B: MENÚ DIGITAL INTERACTIVO -->
+    <section id="menu" class="py-14 max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-widest text-guerrero-yellow">Catálogo Oficial en Pesos Colombianos (COP)</span>
+          <h2 class="font-display text-5xl text-white mt-1">MENÚ DIGITAL <span class="text-guerrero-yellow">GUERREROS</span></h2>
+          <p class="text-sm text-white/70 mt-1">Precios expresados en COP. Los precios y la disponibilidad pueden variar según la sede seleccionada.</p>
+        </div>
+
+        <!-- Buscador Instantáneo -->
+        <div class="relative w-full md:w-80">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
+          <input
+            type="text"
+            id="menuSearchInput"
+            oninput="renderMenu()"
+            placeholder="Buscar burger, pizza, broaster..."
+            class="w-full bg-guerrero-card border border-guerrero-border focus:border-guerrero-yellow rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none transition"
+          />
+        </div>
+      </div>
+
+      <!-- Barra de Categorías -->
+      <div id="categoryTabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-4 mb-8 border-b border-guerrero-border">
+        <!-- Renderizado dinámico -->
+      </div>
+
+      <!-- Grid de Productos -->
+      <div id="menuGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Renderizado dinámico -->
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: UBICACIONES Y SEDES -->
+    <section id="sedes" class="py-14 bg-guerrero-card border-y border-guerrero-border">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-extrabold uppercase tracking-widest text-guerrero-yellow">Nuestras 2 Ubicaciones en Táchira</span>
+          <h2 class="font-display text-5xl text-white mt-1">SEDES OFICIALES <span class="text-guerrero-red">GUERREROS</span></h2>
+          <p class="text-sm text-white/70 mt-2">Consulta la dirección, horarios de atención y comunícate directo al WhatsApp de tu sede preferida.</p>
+        </div>
+
+        <div id="branchesContainer" class="grid md:grid-cols-2 gap-8">
+          <!-- Renderizado dinámico de La Grita y San Cristóbal -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: MÉTODOS DE PAGO OFICIALES -->
+    <section id="pagos" class="py-14 max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-guerrero-yellow">Transacciones Verificadas</span>
+        <h2 class="font-display text-5xl text-white mt-1">MÉTODOS DE <span class="text-guerrero-yellow">PAGO</span></h2>
+        <p class="text-sm text-white/70 mt-2">Haz clic en cualquier dato para copiarlo al portapapeles y adjunta tu comprobante al enviar el pedido por WhatsApp.</p>
+      </div>
+
+      <div id="paymentMethodsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Renderizado dinámico de los 5 métodos oficiales -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="bg-black border-t border-guerrero-border py-12 text-sm text-white/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-4 gap-8 mb-8">
+      <div class="md:col-span-2 space-y-3">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-guerrero-yellow text-black flex items-center justify-center font-extrabold">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <span class="font-display text-3xl text-guerrero-yellow tracking-wider">GUERREROS</span>
+        </div>
+        <p class="text-white/80 font-bold">“TE DAMOS LO TUYO, TE DAMOS FELICIDAD”</p>
+        <p class="text-xs max-w-md leading-relaxed">
+          Especialistas en Hamburguesas, Pollo Broaster, Pizzas, Desayunos, Platos Especiales y Postres en La Grita y San Cristóbal, estado Táchira, Venezuela.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-white font-bold uppercase text-xs tracking-wider mb-3">Contacto por Sede</h3>
+        <ul class="space-y-2 text-xs">
+          <li><strong class="text-guerrero-yellow">La Grita:</strong> Calle 3, a pocos metros de la Plaza Sucre (+58 424-7273294)</li>
+          <li><strong class="text-guerrero-yellow">San Cristóbal:</strong> Korver Nivel Feria II, final Av. Los Angustinos (+58 414-1756383)</li>
+          <li>
+            <a href="https://www.instagram.com/guerrerosburger1/" target="_blank" rel="noopener" class="text-white hover:text-guerrero-yellow inline-flex items-center gap-1.5 mt-1">
+              <i class="fa-brands fa-instagram text-guerrero-yellow"></i> @guerrerosburger1
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-white font-bold uppercase text-xs tracking-wider mb-3">Información Legal y Privacidad</h3>
+        <p class="text-xs leading-relaxed mb-2">
+          Los datos solicitados en el carrito (nombre, teléfono y dirección) se utilizan exclusivamente para coordinar la preparación y entrega de tu pedido vía WhatsApp.
+        </p>
+        <p class="text-[11px] text-white/40">
+          Moneda base del catálogo: Peso Colombiano ($ COP). Los precios y disponibilidad pueden variar por sede.
+        </p>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs gap-4">
+      <p>© <span id="currentYear"></span> GUERREROS. Todos los derechos reservados.</p>
+      <span id="syncIndicatorFooter" class="inline-flex items-center gap-1.5 text-[11px] text-white/50">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Catálogo sincronizado en tiempo real
+      </span>
+    </div>
+  </footer>
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP DIRECTO -->
+  <button onclick="openDirectWhatsApp()" class="fixed bottom-5 right-5 z-30 bg-[#25D366] hover:bg-[#20bd5a] text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-3xl transition transform hover:scale-105" title="Atención por WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </button>
+
+  <!-- MODAL DE PERSONALIZACIÓN DE PRODUCTO -->
+  <div id="productModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-guerrero-card border border-guerrero-border rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div class="p-5 border-b border-guerrero-border flex items-center justify-between sticky top-0 bg-guerrero-card z-10">
+        <div>
+          <span id="modalProductCategory" class="text-[11px] font-extrabold uppercase tracking-wider text-guerrero-yellow"></span>
+          <h3 id="modalProductName" class="font-display text-3xl text-white leading-none mt-0.5"></h3>
+        </div>
+        <button onclick="closeProductModal()" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/70">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-5 space-y-5">
+        <p id="modalProductDesc" class="text-sm text-white/75"></p>
+
+        <!-- Selector de Tamaño (Obligatorio para Pizzas) -->
+        <div id="modalSizesSection" class="hidden space-y-2">
+          <label class="block text-xs font-extrabold uppercase tracking-wider text-guerrero-yellow">
+            Selecciona el Tamaño (Obligatorio):
+          </label>
+          <div id="modalSizesList" class="grid grid-cols-3 gap-2.5"></div>
+        </div>
+
+        <!-- Selector de Adicionales -->
+        <div id="modalExtrasSection" class="space-y-2">
+          <label class="block text-xs font-extrabold uppercase tracking-wider text-guerrero-yellow">
+            Ingredientes Adicionales (Opcional):
+          </label>
+          <div id="modalExtrasList" class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1"></div>
+        </div>
+
+        <!-- Notas de cocina -->
+        <div>
+          <label class="block text-xs font-extrabold uppercase tracking-wider text-white/70 mb-1.5">
+            Notas para la cocina (Opcional):
+          </label>
+          <input id="modalProductNotes" type="text" placeholder="Ej: Sin cebolla, salsas aparte..." class="w-full bg-black border border-guerrero-border rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-guerrero-yellow focus:outline-none" />
+        </div>
+
+        <!-- Cantidad y Botón Agregar -->
+        <div class="pt-3 border-t border-guerrero-border flex items-center justify-between gap-4">
+          <div class="flex items-center bg-black border border-guerrero-border rounded-xl">
+            <button onclick="adjustModalQty(-1)" class="w-10 h-11 text-lg font-bold text-white hover:text-guerrero-yellow">-</button>
+            <span id="modalProductQty" class="w-10 text-center font-extrabold text-sm">1</span>
+            <button onclick="adjustModalQty(1)" class="w-10 h-11 text-lg font-bold text-white hover:text-guerrero-yellow">+</button>
+          </div>
+
+          <button onclick="confirmAddToCart()" class="flex-1 bg-guerrero-yellow hover:bg-guerrero-yellowHover text-black font-extrabold py-3.5 px-5 rounded-xl flex items-center justify-between shadow-lg">
+            <span>Agregar al Pedido</span>
+            <span id="modalTotalPrice" class="font-display text-2xl">$0 COP</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DEL CARRITO Y CHECKOUT EN 6 PASOS -->
+  <div id="cartModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden justify-end">
+    <div class="bg-guerrero-card border-l border-guerrero-border w-full max-w-xl h-full flex flex-col shadow-2xl">
+      <!-- Header Carrito -->
+      <div class="p-5 border-b border-guerrero-border flex items-center justify-between bg-black/60">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-bag-shopping text-guerrero-yellow text-xl"></i>
+          <div>
+            <h3 class="font-display text-3xl text-white leading-none">TU PEDIDO GUERREROS</h3>
+            <p class="text-xs text-white/60">Revisa tus platos, elige modalidad y envía por WhatsApp</p>
+          </div>
+        </div>
+        <button onclick="toggleCartModal(false)" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Cuerpo Carrito + Formulario -->
+      <div class="flex-1 overflow-y-auto p-5 space-y-6">
+        <!-- Paso 1: Sede Seleccionada -->
+        <div class="bg-black/60 border border-guerrero-border p-4 rounded-xl">
+          <label class="block text-xs font-extrabold uppercase tracking-wider text-guerrero-yellow mb-2">
+            Paso 1. Sede para tu pedido
+          </label>
+          <select id="cartBranchSelect" onchange="changeSelectedBranch(this.value)" class="w-full bg-guerrero-card border border-guerrero-border rounded-xl px-3.5 py-2.5 text-sm font-bold text-white focus:border-guerrero-yellow focus:outline-none">
+            <option value="lagrita">Sede La Grita — Calle 3, cerca de Plaza Sucre (+58 424-7273294)</option>
+            <option value="sancristobal">Sede San Cristóbal — Korver Nivel Feria II (+58 414-1756383)</option>
+          </select>
+        </div>
+
+        <!-- Paso 2: Productos en el Carrito -->
+        <div>
+          <div class="flex items-center justify-between mb-2.5">
+            <label class="text-xs font-extrabold uppercase tracking-wider text-guerrero-yellow">
+              Paso 2. Productos Seleccionados
+            </label>
+            <button onclick="clearCart()" class="text-xs text-red-400 hover:underline">Vaciar carrito</button>
+          </div>
+          <div id="cartItemsContainer" class="space-y-3"></div>
+        </div>
+
+        <!-- Paso 3: Datos del Cliente y Modalidad -->
+        <div id="checkoutFormSection" class="space-y-4 pt-4 border-t border-guerrero-border">
+          <label class="block text-xs font-extrabold uppercase tracking-wider text-guerrero-yellow">
+            Paso 3. Datos de Entrega y Contacto
+          </label>
+
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs text-white/70 block mb-1">Tu Nombre *</label>
+              <input id="custName" type="text" placeholder="Ej: Carlos Pérez" class="w-full bg-black border border-guerrero-border rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-guerrero-yellow focus:outline-none" />
+            </div>
+            <div>
+              <label class="text-xs text-white/70 block mb-1">Teléfono / WhatsApp *</label>
+              <input id="custPhone" type="tel" placeholder="Ej: 0424-7000000" class="w-full bg-black border border-guerrero-border rounded-xl px-3.5 py-2.5 text-sm text-white focus:border-guerrero-yellow focus:outline-none" />
+            </div>
+          </div>
+
+          <div>
+            <label class="text-xs text-white/70 block mb-1">Modalidad del Pedido *</label>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" onclick="setDeliveryMode('Retiro en el local')" id="modePickupBtn" class="py-2.5 px-2 rounded-xl border text-xs font-bold transition">
+                <i class="fa-solid fa-bag-shopping block mb-1"></i> Retiro en Local
+              </button>
+              <button type="button" onclick="setDeliveryMode('Entrega a domicilio')" id="modeDeliveryBtn" class="py-2.5 px-2 rounded-xl border text-xs font-bold transition">
+                <i class="fa-solid fa-motorcycle block mb-1"></i> A Domicilio
+              </button>
+              <button type="button" onclick="setDeliveryMode('Consumo en el local')" id="modeDineInBtn" class="py-2.5 px-2 rounded-xl border text-xs font-bold transition">
+                <i class="fa-solid fa-utensils block mb-1"></i> En el Local
+              </button>
+            </div>
+          </div>
+
+          <div id="deliveryAddressBox" class="hidden space-y-1.5">
+            <label class="text-xs text-white/70 block">Dirección exacta de entrega *</label>
+            <textarea id="custAddress" rows="2" placeholder="Indica calle, punto de referencia y sector (sujeto a cobertura de la sede)..." class="w-full bg-black border border-guerrero-border rounded-xl px-3.5 py-2 text-sm text-white focus:border-guerrero-yellow focus:outline-none"></textarea>
+            <p class="text-[11px] text-guerrero-yellow" id="deliveryFeeNotice"></p>
+          </div>
+
+          <div>
+            <label class="text-xs text-white/70 block mb-1">Observaciones adicionales (Opcional)</label>
+            <input id="custNotes" type="text" placeholder="Ej: Enviar vuelto, timbre dañado..." class="w-full bg-black border border-guerrero-border rounded-xl px-3.5 py-2 text-sm text-white focus:border-guerrero-yellow focus:outline-none" />
+          </div>
+
+          <!-- Paso 4: Selección de Método de Pago -->
+          <div class="pt-3 border-t border-guerrero-border space-y-2.5">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-guerrero-yellow">
+              Paso 4. Método de Pago
+            </label>
+            <select id="custPaymentMethod" onchange="renderSelectedPaymentDetails()" class="w-full bg-black border border-guerrero-border rounded-xl px-3.5 py-2.5 text-sm font-bold text-white focus:border-guerrero-yellow focus:outline-none"></select>
+            <div id="selectedPaymentInfoBox" class="bg-black/80 border border-white/10 rounded-xl p-3 text-xs space-y-1.5"></div>
+            <label class="flex items-center gap-2 text-xs text-white/80 cursor-pointer pt-1">
+              <input id="custReceiptCheck" type="checkbox" checked class="accent-guerrero-yellow w-4 h-4 rounded" />
+              <span>Enviaré el comprobante de pago por el chat oficial de WhatsApp.</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Resumen y Botón Confirmación -->
+      <div class="p-5 border-t border-guerrero-border bg-black space-y-3">
+        <div class="space-y-1 text-xs">
+          <div class="flex justify-between text-white/70">
+            <span>Subtotal Productos:</span>
+            <span id="cartSubtotalDisplay" class="font-bold text-white">$0 COP</span>
+          </div>
+          <div id="cartDeliveryRow" class="flex justify-between text-white/70 hidden">
+            <span>Costo de Entrega (Sede):</span>
+            <span id="cartDeliveryDisplay" class="font-bold text-guerrero-yellow">$0 COP</span>
+          </div>
+          <div class="flex justify-between text-base font-extrabold pt-1 border-t border-white/10">
+            <span class="text-white">TOTAL A PAGAR:</span>
+            <span id="cartTotalDisplay" class="font-display text-3xl text-guerrero-yellow">$0 COP</span>
+          </div>
+        </div>
+
+        <button onclick="openOrderSummaryPreview()" class="w-full bg-guerrero-yellow hover:bg-guerrero-yellowHover text-black font-extrabold py-3.5 px-5 rounded-xl flex items-center justify-center gap-2 shadow-lg transition">
+          <i class="fa-solid fa-clipboard-check"></i> Revisar Resumen y Confirmar Pedido
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PASO 5 Y 6: RESUMEN DE CONFIRMACIÓN PREVIO A WHATSAPP -->
+  <div id="orderPreviewModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-guerrero-card border-2 border-guerrero-yellow rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 space-y-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-guerrero-border pb-3">
+        <div>
+          <span class="text-xs font-extrabold uppercase text-guerrero-yellow">Paso 5. Verificación Final</span>
+          <h3 class="font-display text-3xl text-white">CONFIRMA TU PEDIDO</h3>
+        </div>
+        <button onclick="closeOrderSummaryPreview()" class="text-white/60 hover:text-white">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <div id="orderPreviewContent" class="bg-black border border-guerrero-border rounded-xl p-4 text-xs space-y-2 leading-relaxed"></div>
+
+      <div class="bg-guerrero-red/15 border border-guerrero-red/40 rounded-xl p-3 text-xs text-white/90 flex gap-2.5 items-start">
+        <i class="fa-solid fa-triangle-exclamation text-guerrero-yellow text-base mt-0.5"></i>
+        <p>
+          <strong>Importante:</strong> Al pulsar el botón se abrirá WhatsApp con el número oficial de la sede seleccionada. <strong>Tu pedido no se habrá enviado hasta que pulses "Enviar" dentro de WhatsApp</strong> y adjuntes tu comprobante de pago si corresponde.
+        </p>
+      </div>
+
+      <div class="flex gap-3 pt-2">
+        <button onclick="closeOrderSummaryPreview()" class="w-1/3 bg-white/10 hover:bg-white/15 text-white font-bold py-3 rounded-xl text-xs">
+          Volver y Editar
+        </button>
+        <button onclick="sendOrderToWhatsApp()" class="w-2/3 bg-[#25D366] hover:bg-[#1ebe5d] text-black font-extrabold py-3.5 px-4 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg">
+          <i class="fa-brands fa-whatsapp text-xl"></i> Abrir WhatsApp y Enviar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- PANEL ADMINISTRATIVO OCULTO (ACCESO EXCLUSIVO TECLEANDO "1234")     -->
+  <!-- =================================================================== -->
+  <div id="adminPanelModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex-col overflow-hidden">
+    <!-- Topbar Admin -->
+    <div class="bg-guerrero-card border-b border-guerrero-border px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-guerrero-red text-white flex items-center justify-center font-extrabold">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="font-display text-2xl sm:text-3xl text-guerrero-yellow leading-none">PANEL ADMINISTRATIVO GUERREROS</h2>
+            <span id="adminRealtimeBadge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              ● Tiempo Real Activo
+            </span>
+          </div>
+          <p class="text-xs text-white/60">Acceso oculto desbloqueado (1234) • Todos los ajustes actualizan la web de los clientes en vivo</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="switchAdminTab('sales')" id="adminTabBtn_sales" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-extrabold bg-guerrero-yellow text-black">
+          <i class="fa-solid fa-chart-line mr-1"></i> Ventas del Día (12pm-11pm)
+        </button>
+        <button onclick="switchAdminTab('menu')" id="adminTabBtn_menu" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-extrabold bg-white/5 text-white hover:bg-white/10">
+          <i class="fa-solid fa-burger mr-1"></i> Menú y Precios
+        </button>
+        <button onclick="switchAdminTab('extras')" id="adminTabBtn_extras" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-extrabold bg-white/5 text-white hover:bg-white/10">
+          <i class="fa-solid fa-tags mr-1"></i> Adicionales, Tasas y Promos
+        </button>
+        <button onclick="switchAdminTab('branches')" id="adminTabBtn_branches" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-extrabold bg-white/5 text-white hover:bg-white/10">
+          <i class="fa-solid fa-store mr-1"></i> Sedes y Pagos
+        </button>
+        <button onclick="switchAdminTab('cloud')" id="adminTabBtn_cloud" class="admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-extrabold bg-white/5 text-white hover:bg-white/10">
+          <i class="fa-solid fa-cloud mr-1"></i> Sincronización Web
+        </button>
+        <button onclick="closeAdminPanel()" class="ml-2 bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white px-3.5 py-2 rounded-xl text-xs font-extrabold transition">
+          <i class="fa-solid fa-power-off mr-1"></i> Salir
+        </button>
+      </div>
+    </div>
+
+    <!-- Contenido Admin -->
+    <div class="flex-1 overflow-y-auto p-6 max-w-7xl w-full mx-auto space-y-6">
+
+      <!-- TAB 1: CONTROL DE VENTAS DEL DÍA (12:00 PM A 11:00 PM, EXCEPTO JUEVES) -->
+      <div id="adminTab_sales" class="space-y-6">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-guerrero-card border border-guerrero-border p-4 rounded-2xl">
+            <span class="text-xs text-white/60 block">Ventas Confirmadas Hoy (12:00 PM - 11:00 PM)</span>
+            <span id="adminSalesTotalToday" class="font-display text-4xl text-guerrero-yellow mt-1 block">$0 COP</span>
+            <span id="adminSalesShiftNotice" class="text-[11px] text-emerald-400">Turno activo (Cerrado los Jueves)</span>
+          </div>
+          <div class="bg-guerrero-card border border-guerrero-border p-4 rounded-2xl">
+            <span class="text-xs text-white/60 block">Pedidos del Día</span>
+            <span id="adminOrdersCountToday" class="font-display text-4xl text-white mt-1 block">0</span>
+            <span class="text-[11px] text-white/50">Actualización automática en vivo</span>
+          </div>
+          <div class="bg-guerrero-card border border-guerrero-border p-4 rounded-2xl">
+            <span class="text-xs text-white/60 block">Ventas Sede La Grita</span>
+            <span id="adminSalesLaGrita" class="font-display text-3xl text-white mt-1 block">$0 COP</span>
+            <span class="text-[11px] text-white/50">WhatsApp: +58 424-7273294</span>
+          </div>
+          <div class="bg-guerrero-card border border-guerrero-border p-4 rounded-2xl">
+            <span class="text-xs text-white/60 block">Ventas Sede San Cristóbal</span>
+            <span id="adminSalesSanCristobal" class="font-display text-3xl text-white mt-1 block">$0 COP</span>
+            <span class="text-[11px] text-white/50">WhatsApp: +58 414-1756383</span>
+          </div>
+        </div>
+
+        <!-- Registrar Venta Rápida en Caja (POS) -->
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-5">
+          <h3 class="font-display text-2xl text-guerrero-yellow mb-3">REGISTRAR VENTA DIRECTA EN CAJA (POS TIEMPO REAL)</h3>
+          <div class="grid sm:grid-cols-5 gap-3">
+            <input id="posCustomerName" type="text" placeholder="Cliente / Mesa" class="bg-black border border-guerrero-border rounded-xl px-3 py-2 text-xs text-white" />
+            <select id="posBranch" class="bg-black border border-guerrero-border rounded-xl px-3 py-2 text-xs text-white">
+              <option value="lagrita">Sede La Grita</option>
+              <option value="sancristobal">Sede San Cristóbal</option>
+            </select>
+            <select id="posProductSelect" class="bg-black border border-guerrero-border rounded-xl px-3 py-2 text-xs text-white"></select>
+            <input id="posCustomAmount" type="number" placeholder="Monto COP (opcional)" class="bg-black border border-guerrero-border rounded-xl px-3 py-2 text-xs text-white" />
+            <button onclick="registerManualPosSale()" class="bg-guerrero-yellow hover:bg-guerrero-yellowHover text-black font-extrabold rounded-xl px-4 py-2 text-xs">
+              + Registrar Venta Ahora
+            </button>
+          </div>
+        </div>
+
+        <!-- Lista de Pedidos en Tiempo Real -->
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <div>
+              <h3 class="font-display text-2xl text-white">CONTROL DE PEDIDOS Y VENTAS EN TIEMPO REAL</h3>
+              <p class="text-xs text-white/60">Cambia el estado de cada pedido (Recibido, En preparación, Listo, Entregado o Cancelado).</p>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="exportDailySalesCSV()" class="bg-white/10 hover:bg-white/15 text-white text-xs font-bold px-3.5 py-2 rounded-xl">
+                <i class="fa-solid fa-file-csv mr-1"></i> Exportar Cierre del Día
+              </button>
+            </div>
+          </div>
+
+          <div id="adminOrdersTableContainer" class="overflow-x-auto"></div>
+        </div>
+      </div>
+
+      <!-- TAB 2: GESTIÓN DE MENÚ Y PRECIOS -->
+      <div id="adminTab_menu" class="hidden space-y-6">
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-5">
+          <h3 id="adminProductFormTitle" class="font-display text-2xl text-guerrero-yellow mb-3">AGREGAR O EDITAR PRODUCTO EN TIEMPO REAL</h3>
+          <input type="hidden" id="editProdId" value="" />
+          <div class="grid sm:grid-cols-3 gap-3 text-xs">
+            <div>
+              <label class="block text-white/70 mb-1">Nombre del Producto *</label>
+              <input id="editProdName" type="text" placeholder="Ej: Hamburguesa Clásica" class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            </div>
+            <div>
+              <label class="block text-white/70 mb-1">Categoría *</label>
+              <select id="editProdCat" class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white"></select>
+            </div>
+            <div>
+              <label class="block text-white/70 mb-1">Precio en COP (0 = Consultar disponibilidad)</label>
+              <input id="editProdPrice" type="number" placeholder="Ej: 23000" class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-white/70 mb-1">Descripción / Ingredientes</label>
+              <input id="editProdDesc" type="text" placeholder="Descripción oficial del plato..." class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            </div>
+            <div>
+              <label class="block text-white/70 mb-1">Disponibilidad por Sede / Día</label>
+              <select id="editProdScope" class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white">
+                <option value="all">Ambas Sedes (Todos los días)</option>
+                <option value="sunday_only">Solo Domingos (Ej: Sopa Guerrera)</option>
+                <option value="lagrita">Exclusivo Sede La Grita</option>
+                <option value="sancristobal">Exclusivo Sede San Cristóbal</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-white/70 mb-1">Tamaños en COP (Opcional, formato P:20000,M:30000,G:40000)</label>
+              <input id="editProdSizes" type="text" placeholder="Pequeña:20000, Mediana:30000, Grande:40000" class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            </div>
+            <div>
+              <label class="block text-white/70 mb-1">URL de Fotografía o Subir Archivo</label>
+              <input id="editProdImg" type="text" placeholder="https://..." class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            </div>
+            <div>
+              <label class="block text-white/70 mb-1">O elegir foto desde tu dispositivo</label>
+              <input type="file" accept="image/*" onchange="handleAdminImageUpload(event, 'editProdImg')" class="w-full text-xs text-white/70 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:bg-guerrero-yellow file:text-black file:font-bold" />
+            </div>
+          </div>
+          <div class="flex items-center gap-3 mt-4">
+            <button onclick="saveAdminProduct()" class="bg-guerrero-yellow hover:bg-guerrero-yellowHover text-black font-extrabold px-5 py-2.5 rounded-xl text-xs">
+              <i class="fa-solid fa-floppy-disk mr-1"></i> Guardar y Publicar en Tiempo Real
+            </button>
+            <button onclick="resetAdminProductForm()" class="bg-white/10 hover:bg-white/15 text-white font-bold px-4 py-2.5 rounded-xl text-xs">
+              Limpiar Formulario
+            </button>
+          </div>
+        </div>
+
+        <!-- Listado editable de todos los productos -->
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <h3 class="font-display text-2xl text-white">PRODUCTOS DEL CATÁLOGO (EDICIÓN RÁPIDA DE PRECIOS Y ESTADO)</h3>
+            <input id="adminMenuFilter" oninput="renderAdminProductsList()" type="text" placeholder="Filtrar producto..." class="bg-black border border-guerrero-border rounded-xl px-3 py-1.5 text-xs text-white" />
+          </div>
+          <div id="adminProductsList" class="space-y-2.5"></div>
+        </div>
+      </div>
+
+      <!-- TAB 3: ADICIONALES, TASAS Y PROMOCIONES -->
+      <div id="adminTab_extras" class="hidden space-y-6">
+        <!-- Tasas de Referencia -->
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-5">
+          <h3 class="font-display text-2xl text-guerrero-yellow mb-2">CONTROL DE TASAS E INFORMACIÓN CAMBIARIA EN TIEMPO REAL</h3>
+          <p class="text-xs text-white/60 mb-4">El menú mantiene sus precios oficiales en COP. Si deseas mostrar la tasa del día en el cintillo superior para pagos por Pago Móvil (Bs) o Zelle/Binance (USD), ajústala aquí:</p>
+          <div class="grid sm:grid-cols-3 gap-4 text-xs">
+            <div>
+              <label class="block text-white/70 mb-1">Tasa COP por 1 USD (Ej: 4200)</label>
+              <input id="adminRateCopUsd" type="number" class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            </div>
+            <div>
+              <label class="block text-white/70 mb-1">Tasa Bs por 1 USD (Opcional para Pago Móvil)</label>
+              <input id="adminRateVesUsd" type="number" step="0.01" class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            </div>
+            <div class="flex items-end">
+              <button onclick="saveAdminRates()" class="w-full bg-guerrero-yellow text-black font-extrabold py-2.5 rounded-xl">
+                Actualizar Tasas en Vivo
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Promociones Destacadas -->
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-5">
+          <h3 class="font-display text-2xl text-guerrero-yellow mb-3">CREAR / GESTIONAR PROMOCIONES Y COMBOS EN TIEMPO REAL</h3>
+          <div class="grid sm:grid-cols-4 gap-3 text-xs mb-4">
+            <input id="promoTitle" type="text" placeholder="Título (Ej: Combo Guerrero 2x1)" class="bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            <input id="promoDesc" type="text" placeholder="Descripción de la promoción" class="bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            <input id="promoPrice" type="number" placeholder="Precio Promo en COP (Ej: 50000)" class="bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            <button onclick="addAdminPromotion()" class="bg-guerrero-red hover:bg-guerrero-redDark text-white font-extrabold rounded-xl px-4 py-2">
+              + Publicar Promoción
+            </button>
+          </div>
+          <div id="adminPromosList" class="space-y-2"></div>
+        </div>
+
+        <!-- Ingredientes Adicionales -->
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-5">
+          <h3 class="font-display text-2xl text-white mb-2">INGREDIENTES ADICIONALES (CONFIGURACIÓN DE PRECIOS EN COP)</h3>
+          <p class="text-xs text-white/60 mb-4">Configura el precio en COP de cada adicional (Huevo, Tocineta, Jalapeños, Cebolla caramelizada, Pollo, Pepinillos, Croqueta de carne, Chuleta, Maíz) o agrega nuevos.</p>
+          <div class="flex gap-2 mb-4 text-xs">
+            <input id="newExtraName" type="text" placeholder="Nuevo adicional..." class="bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            <input id="newExtraPrice" type="number" placeholder="Precio COP" class="bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            <button onclick="addAdminExtra()" class="bg-guerrero-yellow text-black font-extrabold px-4 py-2 rounded-xl">+ Añadir</button>
+          </div>
+          <div id="adminExtrasList" class="grid sm:grid-cols-3 gap-3"></div>
+        </div>
+      </div>
+
+      <!-- TAB 4: SEDES, HORARIOS Y MÉTODOS DE PAGO -->
+      <div id="adminTab_branches" class="hidden space-y-6">
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-5">
+          <h3 class="font-display text-2xl text-guerrero-yellow mb-3">CONFIGURACIÓN DE HORARIOS LABORALES Y LOGOTIPO</h3>
+          <div class="grid sm:grid-cols-4 gap-3 text-xs">
+            <div>
+              <label class="block text-white/70 mb-1">Hora Apertura (24h, 12 = 12:00 PM)</label>
+              <input id="adminOpenHour" type="number" min="0" max="23" class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            </div>
+            <div>
+              <label class="block text-white/70 mb-1">Hora Cierre (24h, 23 = 11:00 PM)</label>
+              <input id="adminCloseHour" type="number" min="0" max="23" class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white" />
+            </div>
+            <div>
+              <label class="block text-white/70 mb-1">Día Cerrado Semanal</label>
+              <select id="adminClosedDay" class="w-full bg-black border border-guerrero-border rounded-xl px-3 py-2 text-white">
+                <option value="4">Jueves (Cerrado)</option>
+                <option value="-1">Abierto todos los días</option>
+                <option value="1">Lunes</option>
+                <option value="2">Martes</option>
+                <option value="3">Miércoles</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-white/70 mb-1">Subir Logo Oficial GUERREROS</label>
+              <input type="file" accept="image/*" onchange="handleLogoUpload(event)" class="w-full text-xs text-white/70 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:bg-guerrero-yellow file:text-black file:font-bold" />
+            </div>
+          </div>
+          <button onclick="saveAdminSchedule()" class="mt-3 bg-guerrero-yellow text-black font-extrabold px-5 py-2 rounded-xl text-xs">
+            Guardar Horario Laboral en Tiempo Real
+          </button>
+        </div>
+
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-5">
+          <h3 class="font-display text-2xl text-white mb-3">GESTIÓN DE SEDES (LA GRITA Y SAN CRISTÓBAL)</h3>
+          <div id="adminBranchesEditor" class="grid md:grid-cols-2 gap-4"></div>
+        </div>
+
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-5">
+          <h3 class="font-display text-2xl text-white mb-3">GESTIÓN DE MÉTODOS DE PAGO Y CÓDIGOS QR VERIFICADOS</h3>
+          <div id="adminPaymentsEditor" class="grid md:grid-cols-2 gap-4"></div>
+        </div>
+      </div>
+
+      <!-- TAB 5: SINCRONIZACIÓN WEB MULTIDISPOSITIVO (FIREBASE REALTIME DB) -->
+      <div id="adminTab_cloud" class="hidden space-y-6">
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-6 space-y-4">
+          <h3 class="font-display text-3xl text-guerrero-yellow">SINCRONIZACIÓN EN TIEMPO REAL PARA TODOS LOS USUARIOS</h3>
+          <p class="text-xs text-white/80 leading-relaxed">
+            Para que cada cambio de precio, producto eliminado, promoción, tasa o pedido nuevo se refleje <strong>instantáneamente en todos los teléfonos y computadoras que entren a la web</strong>, pega aquí la URL de tu <strong>Firebase Realtime Database</strong> (por ejemplo: <code>https://tu-proyecto-default-rtdb.firebaseio.com</code>).
+          </p>
+          <div class="grid sm:grid-cols-3 gap-3 text-xs">
+            <div class="sm:col-span-2">
+              <label class="block text-white/70 mb-1">URL de Firebase Realtime Database</label>
+              <input id="firebaseDbUrlInput" type="url" placeholder="https://guerreros-burguer-default-rtdb.firebaseio.com" class="w-full bg-black border border-guerrero-border rounded-xl px-3.5 py-2.5 text-white" />
+            </div>
+            <div class="flex items-end">
+              <button onclick="connectFirebaseRealtime()" class="w-full bg-guerrero-yellow hover:bg-guerrero-yellowHover text-black font-extrabold py-2.5 px-4 rounded-xl">
+                Conectar y Sincronizar Catálogo
+              </button>
+            </div>
+          </div>
+          <p id="firebaseStatusMsg" class="text-xs text-emerald-400 font-bold"></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST DE NOTIFICACIONES -->
+  <div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-guerrero-yellow text-black font-extrabold text-xs px-5 py-3 rounded-full shadow-2xl hidden items-center gap-2">
+    <i class="fa-solid fa-circle-check text-guerrero-red"></i>
+    <span id="toastMessage">Acción completada</span>
+  </div>
+
+  <!-- LÓGICA COMPLETA DE LA APLICACIÓN Y SINCRONIZACIÓN EN TIEMPO REAL -->
+  <script>
+    /********************************************************************
+     * 1. ESTADO INICIAL OFICIAL DE GUERREROS (100% FIEL AL CATÁLOGO)
+     ********************************************************************/
+    const DEFAULT_FIREBASE_DB_URL = ""; // Puedes pegar tu URL de Firebase Realtime Database aquí directamente o desde el panel (1234)
+
+    const INITIAL_STATE = {
+      lastUpdated: Date.now(),
+      brand: {
+        name: "GUERREROS",
+        slogan: "TE DAMOS LO TUYO, TE DAMOS FELICIDAD",
+        instagram: "https://www.instagram.com/guerrerosburger1/",
+        instagramHandle: "@guerrerosburger1",
+        logoUrl: ""
+      },
+      schedule: {
+        openHour: 12,   // 12:00 PM
+        closeHour: 23,  // 11:00 PM
+        closedDay: 4    // 4 = Jueves
+      },
+      rates: {
+        copPerUsd: 0,
+        vesPerUsd: 0
+      },
+      branches: {
+        lagrita: {
+          id: "lagrita",
+          name: "Sede La Grita",
+          city: "La Grita, estado Táchira, Venezuela",
+          address: "Calle 3, a pocos metros de la Plaza Sucre.",
+          phoneDisplay: "+58 424-7273294",
+          whatsapp: "584247273294",
+          mapQuery: "https://www.google.com/maps/search/?api=1&query=Plaza+Sucre+Calle+3+La+Grita+Tachira+Venezuela",
+          deliveryFee: 0,
+          active: true
+        },
+        sancristobal: {
+          id: "sancristobal",
+          name: "Sede San Cristóbal",
+          city: "San Cristóbal, estado Táchira, Venezuela",
+          address: "Korver Nivel Feria II, al final de la avenida Los Angustinos.",
+          phoneDisplay: "+58 414-1756383",
+          whatsapp: "584141756383",
+          mapQuery: "https://www.google.com/maps/search/?api=1&query=Avenida+Los+Agustinos+San+Cristobal+Tachira+Venezuela",
+          deliveryFee: 0,
+          active: true
+        }
+      },
+      categories: [
+        "Hamburguesas",
+        "Pizzas",
+        "Pollo Broaster",
+        "Platos Especiales",
+        "Desayunos y Empanadas",
+        "Entradas",
+        "Postres",
+        "Bebidas",
+        "Combos"
+      ],
+      extras: [
+        { id: "ext_huevo", name: "Huevo", price: 0, confirmed: false },
+        { id: "ext_tocineta", name: "Tocineta", price: 0, confirmed: false },
+        { id: "ext_jalapenos", name: "Jalapeños", price: 0, confirmed: false },
+        { id: "ext_cebolla", name: "Cebolla caramelizada", price: 0, confirmed: false },
+        { id: "ext_pollo", name: "Pollo", price: 0, confirmed: false },
+        { id: "ext_pepinillos", name: "Pepinillos", price: 0, confirmed: false },
+        { id: "ext_croqueta", name: "Croqueta de carne", price: 0, confirmed: false },
+        { id: "ext_chuleta", name: "Chuleta", price: 0, confirmed: false },
+        { id: "ext_maiz", name: "Maíz", price: 0, confirmed: false }
+      ],
+      promotions: [
+        {
+          id: "promo_1",
+          title: "SÚPER CAJITA GUERRERA",
+          description: "Especial de la casa con papas a la francesa incluidas. ¡Pídela en La Grita o San Cristóbal!",
+          price: 35000,
+          badge: "DESTACADO"
+        },
+        {
+          id: "promo_2",
+          title: "PICADA GUERRERA PARA COMPARTIR",
+          description: "El plato especial ideal para compartir en familia o con amigos.",
+          price: 75000,
+          badge: "PARA COMPARTIR"
+        },
+        {
+          id: "promo_3",
+          title: "POLLO BROASTER ENTERO",
+          description: "Crujiente por fuera y jugoso por dentro, con el sello de sabor GUERREROS.",
+          price: 95000,
+          badge: "FAMILIAR"
+        }
+      ],
+      products: [
+        // HAMBURGUESAS (Todas incluyen papas a la francesa)
+        { id: "h_clasica", name: "Hamburguesa Clásica", category: "Hamburguesas", price: 23000, desc: "Incluye papas a la francesa. Ingredientes según receta oficial GUERREROS.", img: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all", featured: true },
+        { id: "h_broaster", name: "Hamburguesa Broaster", category: "Hamburguesas", price: 23000, desc: "Filete de pollo broaster crujiente. Incluye papas a la francesa.", img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "h_burgertin", name: "Burger-Tin", category: "Hamburguesas", price: 28000, desc: "Especialidad Burger-Tin. Incluye papas a la francesa.", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "h_cheese", name: "Cheese-Burger", category: "Hamburguesas", price: 28000, desc: "Extra queso fundido al estilo GUERREROS. Incluye papas a la francesa.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "h_mixta", name: "Hamburguesa Mixta", category: "Hamburguesas", price: 28000, desc: "Combinación de carnes al grill. Incluye papas a la francesa.", img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "h_doble", name: "Doble Carne", category: "Hamburguesas", price: 30000, desc: "Doble porción de carne jugosa. Incluye papas a la francesa.", img: "https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "h_guerrera", name: "Guerrera", category: "Hamburguesas", price: 37000, desc: "La hamburguesa insignia de la casa. Incluye papas a la francesa.", img: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all", featured: true },
+        { id: "h_ranchera", name: "Ranchera", category: "Hamburguesas", price: 38000, desc: "Con el toque ranchero especial de la casa. Incluye papas a la francesa.", img: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "h_mexicana", name: "Mexicana-Ranch", category: "Hamburguesas", price: 36000, desc: "Toque mexicano intenso. Incluye papas a la francesa.", img: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "h_cajita", name: "Súper Cajita Guerrera", category: "Hamburguesas", price: 35000, desc: "Cajita especial GUERREROS con papas a la francesa.", img: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+
+        // PIZZAS (Con selector obligatorio Pequeña, Mediana y Grande)
+        {
+          id: "p_ideal", name: "Pizza Ideal", category: "Pizzas", price: 20000,
+          desc: "Selecciona tamaño Pequeña, Mediana o Grande.",
+          sizes: [
+            { label: "Pequeña", price: 20000 },
+            { label: "Mediana", price: 30000 },
+            { label: "Grande", price: 40000 }
+          ],
+          img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all"
+        },
+        {
+          id: "p_pepperoni", name: "Pizza Pepperoni 2.0", category: "Pizzas", price: 25000,
+          desc: "Doble sabor a pepperoni horneado al punto.",
+          sizes: [
+            { label: "Pequeña", price: 25000 },
+            { label: "Mediana", price: 30000 },
+            { label: "Grande", price: 40000 }
+          ],
+          img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all", featured: true
+        },
+        {
+          id: "p_primavera", name: "Pizza Primavera", category: "Pizzas", price: 30000,
+          desc: "Ingredientes frescos seleccionados. Elige el tamaño.",
+          sizes: [
+            { label: "Pequeña", price: 30000 },
+            { label: "Mediana", price: 45000 },
+            { label: "Grande", price: 55000 }
+          ],
+          img: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all"
+        },
+        {
+          id: "p_formaggi", name: "Pizza Formaggi", category: "Pizzas", price: 25000,
+          desc: "Selección especial de quesos fundidos.",
+          sizes: [
+            { label: "Pequeña", price: 25000 },
+            { label: "Mediana", price: 35000 },
+            { label: "Grande", price: 45000 }
+          ],
+          img: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all"
+        },
+        {
+          id: "p_parrillera", name: "Pizza Parrillera", category: "Pizzas", price: 40000,
+          desc: "Nuestra pizza especial con corte parrillero.",
+          sizes: [
+            { label: "Pequeña", price: 40000 },
+            { label: "Mediana", price: 50000 },
+            { label: "Grande", price: 65000 }
+          ],
+          img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all"
+        },
+
+        // POLLO BROASTER
+        { id: "b_entero", name: "Pollo Broaster Entero", category: "Pollo Broaster", price: 95000, desc: "Pollo entero crujiente acompañado al estilo GUERREROS.", img: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all", featured: true },
+        { id: "b_medio", name: "Medio Pollo Broaster", category: "Pollo Broaster", price: 55000, desc: "Media porción de pollo broaster dorado y crujiente.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "b_cuarto", name: "Cuarto de Pollo Broaster", category: "Pollo Broaster", price: 25000, desc: "Porción personal de cuarto de pollo broaster.", img: "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+
+        // PLATOS ESPECIALES
+        { id: "e_picada", name: "Picada Guerrera", category: "Platos Especiales", price: 75000, desc: "Bandeja especial surtida para compartir.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "e_club", name: "Club-House", category: "Platos Especiales", price: 36000, desc: "Sándwich Club-House clásico con papas.", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "e_clubmixto", name: "Club House Mixto", category: "Platos Especiales", price: 45000, desc: "Versión especial mixta de nuestro Club House.", img: "https://images.unsplash.com/photo-1567234669003-dce7a7a88821?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "e_snacks", name: "Guerrero-Snacks", category: "Platos Especiales", price: 25000, desc: "Combinación de snacks especiales de la casa.", img: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "e_choripapa", name: "Choripapa", category: "Platos Especiales", price: 20000, desc: "Papas crujientes con chorizo y salsas de la casa.", img: "https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "e_sopa", name: "Sopa Guerrera (Solo Domingos)", category: "Platos Especiales", price: 20000, desc: "Disponible exclusivamente los días domingo (configurable en panel).", img: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "sunday_only" },
+        { id: "e_cesar", name: "Ensalada César", category: "Platos Especiales", price: 20000, desc: "Fresca ensalada César preparada al momento.", img: "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+
+        // DESAYUNOS Y EMPANADAS
+        { id: "d_emp_quesos", name: "Empanada de Quesos", category: "Desayunos y Empanadas", price: 5000, desc: "Empanada recién hecha rellena de quesos.", img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "d_emp_broaster", name: "Empanada Broaster", category: "Desayunos y Empanadas", price: 5000, desc: "Empanada con relleno especial estilo broaster.", img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "d_emp_rustica", name: "Empanada Rústica", category: "Desayunos y Empanadas", price: 5000, desc: "Empanada rústica tradicional.", img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "d_emp_napolitana", name: "Empanada Napolitana", category: "Desayunos y Empanadas", price: 5000, desc: "Empanada sabor napolitano.", img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "d_emp_mexicana", name: "Empanada Mexicana", category: "Desayunos y Empanadas", price: 5000, desc: "Empanada con toque mexicano.", img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "d_panini", name: "Panini Guerrero", category: "Desayunos y Empanadas", price: 15000, desc: "Desayuno especial Panini Guerrero (Descripción detallada configurable en panel).", img: "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "d_pisca", name: "Pisca Andina", category: "Desayunos y Empanadas", price: 15000, desc: "Tradicional Pisca Andina tachirense.", img: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "d_fitfat", name: "Desayuno Fit o Fat", category: "Desayunos y Empanadas", price: 15000, desc: "Opción de desayuno Fit o Fat (Verificar detalle en sede).", img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+
+        // ENTRADAS (Precios pendientes de confirmación según instrucciones)
+        { id: "en_nachos", name: "Nachos", category: "Entradas", price: 0, desc: "Precio pendiente de confirmación por administración.", img: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "en_tequenos", name: "Tequeños", category: "Entradas", price: 0, desc: "Precio pendiente de confirmación por administración.", img: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" },
+        { id: "en_tostones", name: "Tostones con Queso Frito", category: "Entradas", price: 0, desc: "Precio pendiente de confirmación por administración.", img: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=600&q=80", available: true, published: true, scope: "all" }
+      ],
+      paymentMethods: [
+        {
+          id: "pm_pagomovil",
+          name: "Pago Móvil",
+          platform: "Banco Provincial (0108)",
+          icon: "fa-mobile-screen-button",
+          active: true,
+          qrImage: "",
+          fields: [
+            { label: "Banco", value: "Provincial" },
+            { label: "Cédula de Identidad", value: "24.784.641" },
+            { label: "Teléfono", value: "04247273294" },
+            { label: "Formato Internacional", value: "+58 424-7273294" }
+          ],
+          instructions: "Realiza el Pago Móvil al Banco Provincial y envía el número de referencia o captura por WhatsApp."
+        },
+        {
+          id: "pm_binance",
+          name: "Binance Pay",
+          platform: "Binance",
+          icon: "fa-coins",
+          active: true,
+          qrImage: "",
+          fields: [
+            { label: "Binance ID", value: "482045200" },
+            { label: "Correo Asociado", value: "mirleychacon0111@gmail.com" }
+          ],
+          instructions: "Envía mediante Binance Pay usando el ID o correo oficial y adjunta el comprobante."
+        },
+        {
+          id: "pm_bancolombia",
+          name: "Bancolombia",
+          platform: "Cuenta de Ahorros (COP)",
+          icon: "fa-building-columns",
+          active: true,
+          qrImage: "",
+          fields: [
+            { label: "Tipo de Cuenta", value: "Ahorros" },
+            { label: "Número de Cuenta", value: "74485378476" },
+            { label: "Titular", value: "Wilinton OLIVERA" }
+          ],
+          instructions: "Transfiere el monto exacto en pesos colombianos (COP) y comparte el comprobante."
+        },
+        {
+          id: "pm_zelle",
+          name: "Zelle",
+          platform: "Transferencia Zelle",
+          icon: "fa-dollar-sign",
+          active: true,
+          qrImage: "",
+          fields: [
+            { label: "Correo Zelle", value: "lasmoralagrita@gmail.com" },
+            { label: "Titular", value: "Yanira Berroa" }
+          ],
+          instructions: "Verifica el titular Yanira Berroa antes de confirmar tu transferencia Zelle."
+        },
+        {
+          id: "pm_transferencia",
+          name: "Transferencia Bancaria",
+          platform: "Banco Provincial",
+          icon: "fa-money-check-dollar",
+          active: true,
+          qrImage: "",
+          fields: [
+            { label: "Banco", value: "Provincial" },
+            { label: "Número de Cuenta", value: "0108-0354-31-0100240217" },
+            { label: "Cédula de Identidad", value: "24.784.641" }
+          ],
+          instructions: "Transferencia directa a cuenta del Banco Provincial."
+        }
+      ],
+      orders: []
+    };
+
+    /********************************************************************
+     * 2. GESTIÓN DE ESTADO Y SINCRONIZACIÓN EN TIEMPO REAL
+     ********************************************************************/
+    const STORAGE_KEY = "GUERREROS_APP_STATE_V1";
+    const CART_KEY = "GUERREROS_CART_V1";
+    const BRANCH_KEY = "GUERREROS_SELECTED_BRANCH";
+    const FIREBASE_URL_KEY = "GUERREROS_FIREBASE_DB_URL";
+
+    let appState = loadLocalState();
+    let cart = loadLocalCart();
+    let selectedBranch = localStorage.getItem(BRANCH_KEY) || "lagrita";
+    let activeCategory = "Todas";
+    let deliveryMode = "Retiro en el local";
+
+    // Variables del modal de producto
+    let currentModalProduct = null;
+    let currentModalQty = 1;
+    let currentModalSizeIndex = 0;
+
+    // Canal en tiempo real entre pestañas + Polling/SSE con Firebase Realtime Database
+    const syncChannel = ("BroadcastChannel" in window) ? new BroadcastChannel("guerreros_realtime_channel") : null;
+    let firebaseEventSource = null;
+
+    function loadLocalState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return JSON.parse(JSON.stringify(INITIAL_STATE));
+        const parsed = JSON.parse(raw);
+        return { ...INITIAL_STATE, ...parsed };
+      } catch (e) {
+        return JSON.parse(JSON.stringify(INITIAL_STATE));
+      }
+    }
+
+    function loadLocalCart() {
+      try {
+        const raw = localStorage.getItem(CART_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveCart() {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      updateCartBadge();
+    }
+
+    async function persistAndBroadcastState(toastText) {
+      appState.lastUpdated = Date.now();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+
+      if (syncChannel) {
+        syncChannel.postMessage({ type: "STATE_UPDATED", state: appState });
+      }
+
+      // Si hay una base de datos Firebase Realtime Database configurada, sincroniza con la nube para todos los visitantes
+      const dbUrl = getFirebaseDbUrl();
+      if (dbUrl) {
+        try {
+          await fetch(`${dbUrl.replace(/\/$/, "")}/guerreros_state.json`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(appState)
+          });
+        } catch (err) {
+          console.warn("No se pudo enviar actualización a Firebase:", err);
+        }
+      }
+
+      renderAll();
+      if (toastText) showToast(toastText);
+    }
+
+    function getFirebaseDbUrl() {
+      return localStorage.getItem(FIREBASE_URL_KEY) || DEFAULT_FIREBASE_DB_URL;
+    }
+
+    function initRealtimeSynchronization() {
+      // 1. Escuchar cambios desde otras ventanas/pestañas locales
+      if (syncChannel) {
+        syncChannel.onmessage = (event) => {
+          if (event.data && event.data.type === "STATE_UPDATED") {
+            appState = event.data.state;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            renderAll();
+          }
+        };
+      }
+
+      window.addEventListener("storage", (e) => {
+        if (e.key === STORAGE_KEY && e.newValue) {
+          appState = JSON.parse(e.newValue);
+          renderAll();
+        }
+      });
+
+      // 2. Escuchar Server-Sent Events (SSE) nativos de Firebase Realtime Database para todos los clientes web
+      const dbUrl = getFirebaseDbUrl();
+      if (dbUrl) {
+        startFirebaseRealtimeStream(dbUrl);
+      }
+    }
+
+    function startFirebaseRealtimeStream(dbUrl) {
+      const cleanUrl = dbUrl.replace(/\/$/, "");
+      if (firebaseEventSource) firebaseEventSource.close();
+
+      try {
+        // Primero obtenemos la versión actual de la nube
+        fetch(`${cleanUrl}/guerreros_state.json`)
+          .then(r => r.json())
+          .then(remoteData => {
+            if (remoteData && remoteData.products) {
+              appState = remoteData;
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+              renderAll();
+            } else {
+              // Inicializar la nube con el catálogo actual
+              persistAndBroadcastState();
+            }
+          })
+          .catch(() => {});
+
+        // Suscripción en tiempo real mediante protocolo SSE de Firebase REST
+        firebaseEventSource = new EventSource(`${cleanUrl}/guerreros_state.json`);
+        firebaseEventSource.addEventListener("put", (e) => {
+          try {
+            const payload = JSON.parse(e.data);
+            if (payload && payload.data && payload.data.products) {
+              appState = payload.data;
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+              renderAll();
+            }
+          } catch (err) {}
+        });
+      } catch (e) {
+        console.warn("Error iniciando stream en tiempo real:", e);
+      }
+    }
+
+    function connectFirebaseRealtime() {
+      const input = document.getElementById("firebaseDbUrlInput").value.trim();
+      if (!input || !input.startsWith("https://")) {
+        showToast("Ingresa una URL válida https://...firebaseio.com");
+        return;
+      }
+      localStorage.setItem(FIREBASE_URL_KEY, input);
+      startFirebaseRealtimeStream(input);
+      persistAndBroadcastState("Base de datos en tiempo real conectada");
+      document.getElementById("firebaseStatusMsg").textContent = "Conectado activamente a: " + input;
+    }
+
+    /********************************************************************
+     * 3. FORMATEO DE MONEDA Y VERIFICACIÓN DE HORARIO (12PM - 11PM, NO JUEVES)
+     ********************************************************************/
+    function formatCOP(amount) {
+      const num = Number(amount) || 0;
+      if (num <= 0) return "Consultar disponibilidad";
+      return "$" + num.toLocaleString("es-CO") + " COP";
+    }
+
+    function checkBusinessHours() {
+      const now = new Date();
+      const day = now.getDay(); // 0 Dom, 1 Lun, ..., 4 Jueves
+      const hour = now.getHours();
+      const minutes = now.getMinutes();
+      const currentDecimal = hour + minutes / 60;
+
+      const { openHour, closeHour, closedDay } = appState.schedule;
+      const isClosedDay = Number(closedDay) === day;
+      const isWithinHours = currentDecimal >= openHour && currentDecimal < closeHour;
+      const isOpen = !isClosedDay && isWithinHours;
+
+      const badge = document.getElementById("storeStatusBadge");
+      const text = document.getElementById("storeStatusText");
+      const topText = document.getElementById("scheduleTopText");
+
+      const formatH = (h) => {
+        const suffix = h >= 12 ? "PM" : "AM";
+        const h12 = h % 12 === 0 ? 12 : h % 12;
+        return `${h12}:00 ${suffix}`;
+      };
+
+      const closedDayNames = { "-1": "Ninguno", "1": "Lunes", "2": "Martes", "3": "Miércoles", "4": "Jueves" };
+      topText.textContent = `Horario: ${formatH(openHour)} a ${formatH(closeHour)} (Todos los días excepto ${closedDayNames[String(closedDay)] || "Jueves"})`;
+
+      if (isClosedDay) {
+        text.textContent = "HOY CERRADO POR DESCANSO SEMANAL";
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-red-700 text-white";
+      } else if (isOpen) {
+        text.textContent = `ABIERTO AHORA (${formatH(openHour)} - ${formatH(closeHour)})`;
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-black text-guerrero-yellow";
+      } else {
+        text.textContent = `CERRADO EN ESTE MOMENTO (Abre ${formatH(openHour)})`;
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-neutral-900 text-white/80";
+      }
+
+      return { isOpen, isClosedDay, isSunday: day === 0 };
+    }
+
+    /********************************************************************
+     * 4. DETECTOR SECRETO "1234" PARA ABRIR EL PANEL ADMINISTRATIVO
+     ********************************************************************/
+    let secretKeyBuffer = "";
+    let logoTapCount = 0;
+    let logoTapTimer = null;
+
+    window.addEventListener("keydown", (e) => {
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+      if (tag === "input" || tag === "textarea" || tag === "select") return;
+
+      if (/^[0-9]$/.test(e.key)) {
+        secretKeyBuffer += e.key;
+        if (secretKeyBuffer.length > 4) {
+          secretKeyBuffer = secretKeyBuffer.slice(-4);
+        }
+        if (secretKeyBuffer === "1234") {
+          secretKeyBuffer = "";
+          openAdminPanel();
+        }
+      } else {
+        secretKeyBuffer = "";
+      }
+    });
+
+    // Soporte táctil para teléfonos: tocar 5 veces el logo solicita el código 1234
+    function handleLogoTap() {
+      logoTapCount++;
+      clearTimeout(logoTapTimer);
+      logoTapTimer = setTimeout(() => { logoTapCount = 0; }, 1800);
+      if (logoTapCount >= 5) {
+        logoTapCount = 0;
+        const pin = prompt("Acceso Administrativo Oculto GUERREROS - Ingresa la clave:");
+        if (pin === "1234") {
+          openAdminPanel();
+        }
+      }
+    }
+
+    function openAdminPanel() {
+      const modal = document.getElementById("adminPanelModal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      renderAdminAll();
+      showToast("Panel Administrativo Desbloqueado (1234)");
+    }
+
+    function closeAdminPanel() {
+      const modal = document.getElementById("adminPanelModal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function switchAdminTab(tabName) {
+      ["sales", "menu", "extras", "branches", "cloud"].forEach(t => {
+        document.getElementById(`adminTab_${t}`).classList.toggle("hidden", t !== tabName);
+        const btn = document.getElementById(`adminTabBtn_${t}`);
+        if (t === tabName) {
+          btn.className = "admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-extrabold bg-guerrero-yellow text-black";
+        } else {
+          btn.className = "admin-tab-btn px-3.5 py-2 rounded-xl text-xs font-extrabold bg-white/5 text-white hover:bg-white/10";
+        }
+      });
+      renderAdminAll();
+    }
+
+    /********************************************************************
+     * 5. RENDERIZADO DE LA WEB PÚBLICA
+     ********************************************************************/
+    function renderAll() {
+      checkBusinessHours();
+      renderBrandAndRates();
+      renderBranchSelectors();
+      renderPromotions();
+      renderCategoryTabs();
+      renderMenu();
+      renderBranchesSection();
+      renderPaymentMethodsSection();
+      updateCartBadge();
+      renderCartModalContent();
+      if (!document.getElementById("adminPanelModal").classList.contains("hidden")) {
+        renderAdminAll();
+      }
+    }
+
+    function renderBrandAndRates() {
+      // Logo si fue subido
+      const logoImg = document.getElementById("brandLogoImg");
+      const logoFallback = document.getElementById("brandLogoFallback");
+      if (appState.brand.logoUrl) {
+        logoImg.src = appState.brand.logoUrl;
+        logoImg.classList.remove("hidden");
+        logoFallback.classList.add("hidden");
+      } else {
+        logoImg.classList.add("hidden");
+        logoFallback.classList.remove("hidden");
+      }
+
+      // Tasas informativas si el admin las configuró
+      const rateBanner = document.getElementById("exchangeRateBanner");
+      const { copPerUsd, vesPerUsd } = appState.rates || {};
+      const parts = [];
+      if (copPerUsd > 0) parts.push(`Tasa Ref: $${Number(copPerUsd).toLocaleString("es-CO")} COP/USD`);
+      if (vesPerUsd > 0) parts.push(`Bs ${Number(vesPerUsd).toFixed(2)}/USD`);
+      if (parts.length > 0) {
+        rateBanner.textContent = parts.join(" • ");
+        rateBanner.classList.remove("hidden");
+      } else {
+        rateBanner.textContent = "Moneda Oficial: $ COP";
+      }
+    }
+
+    function changeSelectedBranch(branchId) {
+      if (!appState.branches[branchId]) return;
+      selectedBranch = branchId;
+      localStorage.setItem(BRANCH_KEY, branchId);
+      renderAll();
+      showToast(`Sede activa: ${appState.branches[branchId].name}`);
+    }
+
+    function renderBranchSelectors() {
+      document.getElementById("headerBranchSelect").value = selectedBranch;
+      document.getElementById("cartBranchSelect").value = selectedBranch;
+
+      const btnLG = document.getElementById("heroBtnLaGrita");
+      const btnSC = document.getElementById("heroBtnSanCristobal");
+
+      if (selectedBranch === "lagrita") {
+        btnLG.className = "flex items-center justify-between p-3 rounded-xl border-2 border-guerrero-yellow bg-guerrero-yellow text-black transition font-bold text-left";
+        btnSC.className = "flex items-center justify-between p-3 rounded-xl border-2 border-guerrero-border bg-black/50 text-white/70 hover:border-white/40 transition font-bold text-left";
+      } else {
+        btnSC.className = "flex items-center justify-between p-3 rounded-xl border-2 border-guerrero-yellow bg-guerrero-yellow text-black transition font-bold text-left";
+        btnLG.className = "flex items-center justify-between p-3 rounded-xl border-2 border-guerrero-border bg-black/50 text-white/70 hover:border-white/40 transition font-bold text-left";
+      }
+    }
+
+    function renderPromotions() {
+      const container = document.getElementById("promotionsContainer");
+      const promos = appState.promotions || [];
+      if (promos.length === 0) {
+        container.innerHTML = `<div class="col-span-3 text-center text-white/50 text-sm py-4">No hay promociones activas en este momento.</div>`;
+        return;
+      }
+
+      container.innerHTML = promos.map(p => `
+        <div class="bg-guerrero-black border border-guerrero-yellow/30 rounded-2xl p-5 flex flex-col justify-between card-hover relative overflow-hidden">
+          <div>
+            <span class="inline-block bg-guerrero-red text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2">
+              ${escapeHtml(p.badge || "PROMOCIÓN")}
+            </span>
+            <h3 class="font-display text-3xl text-white leading-tight">${escapeHtml(p.title)}</h3>
+            <p class="text-xs text-white/70 mt-1.5 leading-relaxed">${escapeHtml(p.description)}</p>
+          </div>
+          <div class="pt-4 mt-4 border-t border-white/10 flex items-center justify-between">
+            <span class="font-display text-3xl text-guerrero-yellow">${formatCOP(p.price)}</span>
+            <button onclick="quickAddPromo('${p.id}')" class="bg-guerrero-yellow hover:bg-guerrero-yellowHover text-black font-extrabold text-xs px-4 py-2.5 rounded-xl transition">
+              + Pedir Promo
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function quickAddPromo(promoId) {
+      const promo = (appState.promotions || []).find(p => p.id === promoId);
+      if (!promo || promo.price <= 0) return;
+      cart.push({
+        cartItemId: "ci_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+        productId: promo.id,
+        name: promo.title,
+        sizeLabel: "",
+        unitPrice: Number(promo.price),
+        extras: [],
+        notes: "Promoción Destacada",
+        qty: 1
+      });
+      saveCart();
+      renderCartModalContent();
+      showToast(`${promo.title} agregado al carrito`);
+    }
+
+    function renderCategoryTabs() {
+      const container = document.getElementById("categoryTabs");
+      const allCats = ["Todas", ...appState.categories];
+      container.innerHTML = allCats.map(cat => {
+        const isActive = activeCategory === cat;
+        return `
+          <button
+            onclick="filterCategory('${escapeHtml(cat)}')"
+            class="whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-extrabold transition ${
+              isActive
+                ? 'bg-guerrero-yellow text-black shadow-lg shadow-guerrero-yellow/20'
+                : 'bg-guerrero-card text-white/75 hover:text-white border border-guerrero-border'
+            }"
+          >
+            ${escapeHtml(cat)}
+          </button>
+        `;
+      }).join("");
+    }
+
+    function filterCategory(cat) {
+      activeCategory = cat;
+      renderCategoryTabs();
+      renderMenu();
+    }
+
+    function renderMenu() {
+      const grid = document.getElementById("menuGrid");
+      const search = (document.getElementById("menuSearchInput").value || "").toLowerCase().trim();
+      const { isSunday } = checkBusinessHours();
+
+      const filtered = appState.products.filter(prod => {
+        if (!prod.published) return false;
+        if (prod.scope === "lagrita" && selectedBranch !== "lagrita") return false;
+        if (prod.scope === "sancristobal" && selectedBranch !== "sancristobal") return false;
+        if (activeCategory !== "Todas" && prod.category !== activeCategory) return false;
+        if (search && !prod.name.toLowerCase().includes(search) && !(prod.desc || "").toLowerCase().includes(search)) {
+          return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-guerrero-card border border-guerrero-border rounded-2xl p-10 text-center space-y-2">
+            <i class="fa-solid fa-utensils text-3xl text-guerrero-yellow"></i>
+            <h3 class="font-display text-2xl text-white">No hay productos publicados en esta categoría aún</h3>
+            <p class="text-xs text-white/60">Puedes buscar en otra categoría o agregar productos desde el panel administrativo (1234).</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(prod => {
+        const isSundayRestricted = prod.scope === "sunday_only" && !isSunday;
+        const isUnpriced = (!prod.sizes || prod.sizes.length === 0) && (!prod.price || prod.price <= 0);
+        const canOrder = prod.available && !isSundayRestricted && !isUnpriced;
+
+        let priceDisplay = formatCOP(prod.price);
+        if (prod.sizes && prod.sizes.length > 0) {
+          const minPrice = Math.min(...prod.sizes.map(s => Number(s.price)));
+          priceDisplay = `Desde ${formatCOP(minPrice)}`;
+        }
+
+        return `
+          <article class="bg-guerrero-card border border-guerrero-border rounded-2xl overflow-hidden flex flex-col justify-between card-hover">
+            <div>
+              <div class="relative h-48 bg-black overflow-hidden">
+                <img src="${escapeHtml(prod.img || 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80')}" alt="${escapeHtml(prod.name)}" loading="lazy" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-guerrero-card via-transparent to-black/30"></div>
+                <span class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-guerrero-yellow text-[10px] font-extrabold px-2.5 py-1 rounded-lg uppercase">
+                  ${escapeHtml(prod.category)}
+                </span>
+                ${!prod.available ? `<span class="absolute top-3 right-3 bg-red-600 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg uppercase">AGOTADO</span>` : ''}
+                ${prod.scope === 'sunday_only' ? `<span class="absolute bottom-3 left-3 bg-guerrero-red text-white text-[10px] font-extrabold px-2.5 py-1 rounded-md">SOLO DOMINGOS</span>` : ''}
+              </div>
+
+              <div class="p-5">
+                <h3 class="font-display text-2xl text-white leading-tight">${escapeHtml(prod.name)}</h3>
+                <p class="text-xs text-white/70 mt-1 leading-relaxed">${escapeHtml(prod.desc || '')}</p>
+
+                ${prod.sizes && prod.sizes.length > 0 ? `
+                  <div class="mt-3 flex flex-wrap gap-1.5">
+                    ${prod.sizes.map(s => `
+                      <span class="text-[11px] bg-black border border-guerrero-border px-2 py-0.5 rounded-md text-white/85">
+                        <strong>${escapeHtml(s.label)}:</strong> ${formatCOP(s.price)}
+                      </span>
+                    `).join("")}
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+
+            <div class="px-5 pb-5 pt-3 border-t border-white/5 flex items-center justify-between gap-2">
+              <div>
+                <span class="text-[10px] uppercase text-white/50 block">Precio</span>
+                <span class="font-display text-2xl ${isUnpriced ? 'text-white/60 text-lg' : 'text-guerrero-yellow'}">${priceDisplay}</span>
+              </div>
+
+              ${canOrder ? `
+                <button onclick="openProductModal('${prod.id}')" class="bg-guerrero-yellow hover:bg-guerrero-yellowHover text-black font-extrabold text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow-md transition">
+                  <i class="fa-solid fa-plus"></i> Agregar
+                </button>
+              ` : `
+                <span class="bg-white/5 text-white/50 font-bold text-[11px] px-3 py-2 rounded-xl">
+                  ${!prod.available ? 'Agotado' : isSundayRestricted ? 'Solo Domingos' : 'Consultar en Sede'}
+                </span>
+              `}
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderBranchesSection() {
+      const container = document.getElementById("branchesContainer");
+      const branches = Object.values(appState.branches);
+
+      container.innerHTML = branches.map(b => {
+        const isSelected = selectedBranch === b.id;
+        return `
+          <div class="bg-guerrero-black border-2 ${isSelected ? 'border-guerrero-yellow' : 'border-guerrero-border'} rounded-2xl p-6 space-y-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <span class="text-[11px] font-extrabold uppercase tracking-wider ${isSelected ? 'text-guerrero-yellow' : 'text-white/60'}">
+                  ${isSelected ? '● Sede Seleccionada Actualmente' : 'Sede Disponible'}
+                </span>
+                <h3 class="font-display text-4xl text-white mt-0.5">${escapeHtml(b.name)}</h3>
+                <p class="text-xs text-white/60">${escapeHtml(b.city)}</p>
+              </div>
+              <button onclick="changeSelectedBranch('${b.id}')" class="${isSelected ? 'bg-guerrero-yellow text-black' : 'bg-white/10 text-white hover:bg-white/20'} font-extrabold text-xs px-3.5 py-2 rounded-xl transition">
+                ${isSelected ? 'Sede Activa' : 'Elegir esta Sede'}
+              </button>
+            </div>
+
+            <div class="space-y-2 text-xs text-white/85 bg-guerrero-card p-4 rounded-xl border border-guerrero-border">
+              <p class="flex items-start gap-2.5">
+                <i class="fa-solid fa-location-dot text-guerrero-red mt-1"></i>
+                <span><strong>Dirección:</strong> ${escapeHtml(b.address)}</span>
+              </p>
+              <p class="flex items-center gap-2.5">
+                <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                <span><strong>Teléfono / WhatsApp:</strong> ${escapeHtml(b.phoneDisplay)}</span>
+              </p>
+              <p class="flex items-center gap-2.5">
+                <i class="fa-regular fa-clock text-guerrero-yellow"></i>
+                <span><strong>Horario:</strong> 12:00 PM a 11:00 PM (Todos los días excepto Jueves)</span>
+              </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-3 pt-1">
+              <a href="https://wa.me/${b.whatsapp}" target="_blank" rel="noopener" class="bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-black border border-[#25D366]/40 font-extrabold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition">
+                <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp ${escapeHtml(b.name)}
+              </a>
+              <a href="${escapeHtml(b.mapQuery)}" target="_blank" rel="noopener" class="bg-white/5 hover:bg-white/15 text-white font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition">
+                <i class="fa-solid fa-map-location-dot text-guerrero-yellow"></i> Cómo llegar en Mapa
+              </a>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderPaymentMethodsSection() {
+      const grid = document.getElementById("paymentMethodsGrid");
+      const activeMethods = (appState.paymentMethods || []).filter(m => m.active);
+
+      grid.innerHTML = activeMethods.map(m => `
+        <div class="bg-guerrero-card border border-guerrero-border rounded-2xl p-6 flex flex-col justify-between space-y-4 card-hover">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-guerrero-yellow/15 border border-guerrero-yellow/40 text-guerrero-yellow flex items-center justify-center text-lg">
+                  <i class="fa-solid ${escapeHtml(m.icon || 'fa-credit-card')}"></i>
+                </div>
+                <div>
+                  <h3 class="font-display text-2xl text-white leading-none">${escapeHtml(m.name)}</h3>
+                  <span class="text-xs text-guerrero-yellow font-semibold">${escapeHtml(m.platform)}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-black border border-guerrero-border rounded-xl p-3.5 space-y-2 text-xs">
+              ${m.fields.map(f => `
+                <div class="flex items-center justify-between gap-2 py-1 border-b border-white/5 last:border-0">
+                  <span class="text-white/60">${escapeHtml(f.label)}:</span>
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-white select-all">${escapeHtml(f.value)}</span>
+                    <button onclick="copyText('${escapeHtml(f.value)}')" class="text-guerrero-yellow hover:text-white p-1" title="Copiar dato">
+                      <i class="fa-regular fa-copy"></i>
+                    </button>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+
+            ${m.qrImage ? `
+              <div class="bg-white p-3 rounded-xl text-center">
+                <img src="${escapeHtml(m.qrImage)}" alt="Código QR Oficial ${escapeHtml(m.name)}" class="w-40 h-40 object-contain mx-auto" />
+                <span class="text-[11px] text-black font-bold block mt-1">Código QR Oficial Verificado</span>
+              </div>
+            ` : ''}
+
+            <p class="text-xs text-white/65 leading-relaxed">${escapeHtml(m.instructions)}</p>
+          </div>
+
+          <button onclick="copyAllPaymentMethod('${m.id}')" class="w-full bg-white/10 hover:bg-guerrero-yellow hover:text-black text-white font-extrabold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition">
+            <i class="fa-regular fa-copy"></i> Copiar todos los datos de ${escapeHtml(m.name)}
+          </button>
+        </div>
+      `).join("");
+    }
+
+    function copyText(value) {
+      navigator.clipboard.writeText(value);
+      showToast(`Copiado: ${value}`);
+    }
+
+    function copyAllPaymentMethod(methodId) {
+      const m = appState.paymentMethods.find(x => x.id === methodId);
+      if (!m) return;
+      const text = `${m.name} (${m.platform})\n` + m.fields.map(f => `${f.label}: ${f.value}`).join("\n");
+      navigator.clipboard.writeText(text);
+      showToast(`Datos de ${m.name} copiados al portapapeles`);
+    }
+
+    /********************************************************************
+     * 6. MODAL DE PERSONALIZACIÓN Y CARRITO DE COMPRAS
+     ********************************************************************/
+    function openProductModal(productId) {
+      const prod = appState.products.find(p => p.id === productId);
+      if (!prod) return;
+
+      currentModalProduct = prod;
+      currentModalQty = 1;
+      currentModalSizeIndex = 0;
+
+      document.getElementById("modalProductCategory").textContent = prod.category;
+      document.getElementById("modalProductName").textContent = prod.name;
+      document.getElementById("modalProductDesc").textContent = prod.desc || "";
+      document.getElementById("modalProductNotes").value = "";
+      document.getElementById("modalProductQty").textContent = "1";
+
+      // Tamaños (ej. Pizzas)
+      const sizesSection = document.getElementById("modalSizesSection");
+      const sizesList = document.getElementById("modalSizesList");
+      if (prod.sizes && prod.sizes.length > 0) {
+        sizesSection.classList.remove("hidden");
+        renderModalSizes();
+      } else {
+        sizesSection.classList.add("hidden");
+        sizesList.innerHTML = "";
+      }
+
+      // Adicionales
+      const extrasList = document.getElementById("modalExtrasList");
+      extrasList.innerHTML = (appState.extras || []).map(ext => `
+        <label class="flex items-center justify-between bg-black border border-guerrero-border rounded-xl p-2.5 text-xs cursor-pointer hover:border-guerrero-yellow">
+          <div class="flex items-center gap-2">
+            <input type="checkbox" value="${ext.id}" onchange="updateModalTotalPrice()" class="modal-extra-checkbox accent-guerrero-yellow w-4 h-4 rounded" />
+            <span class="font-semibold text-white">${escapeHtml(ext.name)}</span>
+          </div>
+          <span class="text-guerrero-yellow font-bold">${ext.price > 0 ? '+' + formatCOP(ext.price) : 'Sujeto a sede'}</span>
+        </label>
+      `).join("");
+
+      updateModalTotalPrice();
+
+      const modal = document.getElementById("productModal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function renderModalSizes() {
+      const sizesList = document.getElementById("modalSizesList");
+      sizesList.innerHTML = currentModalProduct.sizes.map((s, idx) => `
+        <button
+          type="button"
+          onclick="selectModalSize(${idx})"
+          class="p-2.5 rounded-xl border text-center transition ${
+            idx === currentModalSizeIndex
+              ? 'border-guerrero-yellow bg-guerrero-yellow text-black font-extrabold'
+              : 'border-guerrero-border bg-black text-white/80'
+          }"
+        >
+          <span class="block text-xs">${escapeHtml(s.label)}</span>
+          <span class="block font-display text-lg">${formatCOP(s.price)}</span>
+        </button>
+      `).join("");
+    }
+
+    function selectModalSize(idx) {
+      currentModalSizeIndex = idx;
+      renderModalSizes();
+      updateModalTotalPrice();
+    }
+
+    function adjustModalQty(delta) {
+      currentModalQty = Math.max(1, currentModalQty + delta);
+      document.getElementById("modalProductQty").textContent = String(currentModalQty);
+      updateModalTotalPrice();
+    }
+
+    function updateModalTotalPrice() {
+      if (!currentModalProduct) return;
+      let basePrice = Number(currentModalProduct.price) || 0;
+      if (currentModalProduct.sizes && currentModalProduct.sizes.length > 0) {
+        basePrice = Number(currentModalProduct.sizes[currentModalSizeIndex].price) || 0;
+      }
+
+      let extrasTotal = 0;
+      document.querySelectorAll(".modal-extra-checkbox:checked").forEach(cb => {
+        const found = appState.extras.find(e => e.id === cb.value);
+        if (found && found.price > 0) extrasTotal += Number(found.price);
+      });
+
+      const total = (basePrice + extrasTotal) * currentModalQty;
+      document.getElementById("modalTotalPrice").textContent = formatCOP(total);
+    }
+
+    function closeProductModal() {
+      const modal = document.getElementById("productModal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function confirmAddToCart() {
+      if (!currentModalProduct) return;
+
+      let unitPrice = Number(currentModalProduct.price) || 0;
+      let sizeLabel = "";
+      if (currentModalProduct.sizes && currentModalProduct.sizes.length > 0) {
+        const chosenSize = currentModalProduct.sizes[currentModalSizeIndex];
+        unitPrice = Number(chosenSize.price) || 0;
+        sizeLabel = chosenSize.label;
+      }
+
+      const chosenExtras = [];
+      document.querySelectorAll(".modal-extra-checkbox:checked").forEach(cb => {
+        const found = appState.extras.find(e => e.id === cb.value);
+        if (found) chosenExtras.push({ id: found.id, name: found.name, price: Number(found.price) || 0 });
+      });
+
+      const notes = document.getElementById("modalProductNotes").value.trim();
+
+      cart.push({
+        cartItemId: "ci_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+        productId: currentModalProduct.id,
+        name: currentModalProduct.name,
+        sizeLabel,
+        unitPrice,
+        extras: chosenExtras,
+        notes,
+        qty: currentModalQty
+      });
+
+      saveCart();
+      closeProductModal();
+      renderCartModalContent();
+      showToast(`${currentModalProduct.name} agregado al pedido`);
+    }
+
+    function updateCartBadge() {
+      const count = cart.reduce((acc, item) => acc + item.qty, 0);
+      document.getElementById("cartCountBadge").textContent = String(count);
+    }
+
+    function toggleCartModal(open) {
+      const modal = document.getElementById("cartModal");
+      if (open) {
+        renderCartModalContent();
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      } else {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    }
+
+    function setDeliveryMode(mode) {
+      deliveryMode = mode;
+      renderCartModalContent();
+    }
+
+    function calculateCartTotals() {
+      let subtotal = 0;
+      cart.forEach(item => {
+        const extrasSum = (item.extras || []).reduce((a, e) => a + (Number(e.price) || 0), 0);
+        subtotal += (Number(item.unitPrice) + extrasSum) * item.qty;
+      });
+
+      const branchObj = appState.branches[selectedBranch];
+      const deliveryFee = (deliveryMode === "Entrega a domicilio" && branchObj) ? (Number(branchObj.deliveryFee) || 0) : 0;
+      const total = subtotal + deliveryFee;
+
+      return { subtotal, deliveryFee, total };
+    }
+
+    function renderCartModalContent() {
+      const container = document.getElementById("cartItemsContainer");
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="bg-black/40 border border-guerrero-border rounded-xl p-6 text-center text-xs text-white/60">
+            Tu carrito está vacío. Agrega hamburguesas, pizzas o broaster desde el menú digital.
+          </div>
+        `;
+      } else {
+        container.innerHTML = cart.map(item => {
+          const extrasSum = (item.extras || []).reduce((a, e) => a + (Number(e.price) || 0), 0);
+          const lineTotal = (Number(item.unitPrice) + extrasSum) * item.qty;
+
+          return `
+            <div class="bg-black border border-guerrero-border rounded-xl p-3.5 flex items-start justify-between gap-3">
+              <div class="text-xs space-y-1">
+                <div class="font-extrabold text-white text-sm">
+                  ${escapeHtml(item.name)} ${item.sizeLabel ? `<span class="text-guerrero-yellow">(${escapeHtml(item.sizeLabel)})</span>` : ''}
+                </div>
+                <div class="text-white/60">Precio unitario: ${formatCOP(item.unitPrice)}</div>
+                ${item.extras && item.extras.length > 0 ? `
+                  <div class="text-guerrero-yellow">
+                    + Adicionales: ${item.extras.map(e => `${escapeHtml(e.name)} (${e.price > 0 ? formatCOP(e.price) : 'Por confirmar'})`).join(", ")}
+                  </div>
+                ` : ''}
+                ${item.notes ? `<div class="text-white/70 italic">Nota: "${escapeHtml(item.notes)}"</div>` : ''}
+                <div class="font-extrabold text-guerrero-yellow pt-1">Subtotal ítem: ${formatCOP(lineTotal)}</div>
+              </div>
+
+              <div class="flex flex-col items-end gap-2">
+                <div class="flex items-center bg-guerrero-card border border-guerrero-border rounded-lg">
+                  <button onclick="changeCartItemQty('${item.cartItemId}', -1)" class="px-2.5 py-1 text-white hover:text-guerrero-yellow font-bold">-</button>
+                  <span class="px-2 text-xs font-extrabold">${item.qty}</span>
+                  <button onclick="changeCartItemQty('${item.cartItemId}', 1)" class="px-2.5 py-1 text-white hover:text-guerrero-yellow font-bold">+</button>
+                </div>
+                <button onclick="removeCartItem('${item.cartItemId}')" class="text-[11px] text-red-400 hover:underline">
+                  <i class="fa-regular fa-trash-can"></i> Eliminar
+                </button>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      // Botones de modalidad
+      const modes = [
+        { id: "modePickupBtn", label: "Retiro en el local" },
+        { id: "modeDeliveryBtn", label: "Entrega a domicilio" },
+        { id: "modeDineInBtn", label: "Consumo en el local" }
+      ];
+      modes.forEach(m => {
+        const btn = document.getElementById(m.id);
+        if (deliveryMode === m.label) {
+          btn.className = "py-2.5 px-2 rounded-xl border border-guerrero-yellow bg-guerrero-yellow text-black text-xs font-extrabold transition";
+        } else {
+          btn.className = "py-2.5 px-2 rounded-xl border border-guerrero-border bg-black text-white/70 text-xs font-bold transition";
+        }
+      });
+
+      const addrBox = document.getElementById("deliveryAddressBox");
+      const feeNotice = document.getElementById("deliveryFeeNotice");
+      const branchObj = appState.branches[selectedBranch];
+      if (deliveryMode === "Entrega a domicilio") {
+        addrBox.classList.remove("hidden");
+        feeNotice.textContent = branchObj.deliveryFee > 0
+          ? `Costo de envío configurado en ${branchObj.name}: ${formatCOP(branchObj.deliveryFee)}`
+          : `El costo y cobertura de envío a domicilio se confirmarán según tu sector en ${branchObj.name}.`;
+      } else {
+        addrBox.classList.add("hidden");
+      }
+
+      // Selector de métodos de pago en Checkout
+      const pmSelect = document.getElementById("custPaymentMethod");
+      const currentVal = pmSelect.value;
+      const activeMethods = (appState.paymentMethods || []).filter(m => m.active);
+      pmSelect.innerHTML = activeMethods.map(m => `<option value="${m.id}">${escapeHtml(m.name)} — ${escapeHtml(m.platform)}</option>`).join("");
+      if (currentVal && activeMethods.some(m => m.id === currentVal)) {
+        pmSelect.value = currentVal;
+      }
+      renderSelectedPaymentDetails();
+
+      // Totales
+      const { subtotal, deliveryFee, total } = calculateCartTotals();
+      document.getElementById("cartSubtotalDisplay").textContent = formatCOP(subtotal);
+      const delRow = document.getElementById("cartDeliveryRow");
+      if (deliveryMode === "Entrega a domicilio") {
+        delRow.classList.remove("hidden");
+        document.getElementById("cartDeliveryDisplay").textContent = deliveryFee > 0 ? formatCOP(deliveryFee) : "Por confirmar según zona";
+      } else {
+        delRow.classList.add("hidden");
+      }
+      document.getElementById("cartTotalDisplay").textContent = formatCOP(total);
+    }
+
+    function renderSelectedPaymentDetails() {
+      const pmId = document.getElementById("custPaymentMethod").value;
+      const box = document.getElementById("selectedPaymentInfoBox");
+      const m = (appState.paymentMethods || []).find(x => x.id === pmId);
+      if (!m) {
+        box.innerHTML = "";
+        return;
+      }
+      box.innerHTML = m.fields.map(f => `
+        <div class="flex justify-between items-center">
+          <span class="text-white/60">${escapeHtml(f.label)}:</span>
+          <button type="button" onclick="copyText('${escapeHtml(f.value)}')" class="font-bold text-guerrero-yellow hover:underline">
+            ${escapeHtml(f.value)} <i class="fa-regular fa-copy ml-1"></i>
+          </button>
+        </div>
+      `).join("");
+    }
+
+    function changeCartItemQty(cartItemId, delta) {
+      const item = cart.find(i => i.cartItemId === cartItemId);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.cartItemId !== cartItemId);
+      }
+      saveCart();
+      renderCartModalContent();
+    }
+
+    function removeCartItem(cartItemId) {
+      cart = cart.filter(i => i.cartItemId !== cartItemId);
+      saveCart();
+      renderCartModalContent();
+    }
+
+    function clearCart() {
+      cart = [];
+      saveCart();
+      renderCartModalContent();
+    }
+
+    /********************************************************************
+     * 7. CONFIRMACIÓN Y ENVÍO A WHATSAPP + REGISTRO EN PANEL DE VENTAS
+     ********************************************************************/
+    function openOrderSummaryPreview() {
+      if (cart.length === 0) {
+        showToast("Agrega al menos un producto al carrito");
+        return;
+      }
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+
+      if (!name) {
+        showToast("Por favor ingresa tu nombre");
+        document.getElementById("custName").focus();
+        return;
+      }
+      if (!phone || phone.length < 7) {
+        showToast("Por favor ingresa un número de teléfono válido");
+        document.getElementById("custPhone").focus();
+        return;
+      }
+      if (deliveryMode === "Entrega a domicilio" && !address) {
+        showToast("Ingresa la dirección para la entrega a domicilio");
+        document.getElementById("custAddress").focus();
+        return;
+      }
+
+      const branch = appState.branches[selectedBranch];
+      const pmId = document.getElementById("custPaymentMethod").value;
+      const pm = appState.paymentMethods.find(x => x.id === pmId);
+      const notes = document.getElementById("custNotes").value.trim();
+      const { subtotal, deliveryFee, total } = calculateCartTotals();
+
+      const previewHtml = `
+        <div class="font-bold text-guerrero-yellow text-sm border-b border-white/10 pb-1.5">
+          SEDE DESTINO: ${escapeHtml(branch.name)} (${escapeHtml(branch.phoneDisplay)})
+        </div>
+        <div><strong>Cliente:</strong> ${escapeHtml(name)} (${escapeHtml(phone)})</div>
+        <div><strong>Modalidad:</strong> ${escapeHtml(deliveryMode)}</div>
+        ${deliveryMode === "Entrega a domicilio" ? `<div><strong>Dirección:</strong> ${escapeHtml(address)}</div>` : ''}
+        <div><strong>Método de Pago:</strong> ${pm ? escapeHtml(pm.name + " - " + pm.platform) : ''}</div>
+        ${notes ? `<div><strong>Observaciones:</strong> ${escapeHtml(notes)}</div>` : ''}
+        <div class="border-t border-white/10 pt-2 mt-2 space-y-1">
+          <div class="font-bold text-white">Detalle de Productos:</div>
+          ${cart.map(item => {
+            const exSum = (item.extras || []).reduce((a, e) => a + (Number(e.price) || 0), 0);
+            const line = (Number(item.unitPrice) + exSum) * item.qty;
+            return `<div>• ${item.qty}x ${escapeHtml(item.name)} ${item.sizeLabel ? `(${escapeHtml(item.sizeLabel)})` : ''} — ${formatCOP(line)}</div>`;
+          }).join("")}
+        </div>
+        <div class="border-t border-white/10 pt-2 mt-2 text-sm font-extrabold text-guerrero-yellow flex justify-between">
+          <span>TOTAL DEL PEDIDO:</span>
+          <span>${formatCOP(total)}</span>
+        </div>
+      `;
+
+      document.getElementById("orderPreviewContent").innerHTML = previewHtml;
+      const modal = document.getElementById("orderPreviewModal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeOrderSummaryPreview() {
+      const modal = document.getElementById("orderPreviewModal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function sendOrderToWhatsApp() {
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+      const notes = document.getElementById("custNotes").value.trim();
+      const receiptCheck = document.getElementById("custReceiptCheck").checked;
+      const branch = appState.branches[selectedBranch];
+      const pmId = document.getElementById("custPaymentMethod").value;
+      const pm = appState.paymentMethods.find(x => x.id === pmId);
+      const { subtotal, deliveryFee, total } = calculateCartTotals();
+
+      // Guardar el pedido con precios congelados en el historial en tiempo real para el Panel Administrativo
+      const newOrder = {
+        id: "ORD-" + Date.now().toString().slice(-6),
+        createdAt: new Date().toISOString(),
+        branchId: branch.id,
+        branchName: branch.name,
+        customerName: name,
+        customerPhone: phone,
+        deliveryMode,
+        address: deliveryMode === "Entrega a domicilio" ? address : "",
+        paymentMethod: pm ? `${pm.name} (${pm.platform})` : "Por definir",
+        notes,
+        items: cart.map(i => ({
+          name: i.name,
+          sizeLabel: i.sizeLabel,
+          qty: i.qty,
+          unitPrice: i.unitPrice,
+          extras: i.extras,
+          notes: i.notes
+        })),
+        subtotal,
+        deliveryFee,
+        total,
+        status: "Recibido"
+      };
+
+      appState.orders = [newOrder, ...(appState.orders || [])];
+      persistAndBroadcastState();
+
+      // Construir mensaje de WhatsApp codificado
+      const lines = [
+        `🍔 *NUEVO PEDIDO WEB - GUERREROS* 🔥`,
+        `*Pedido:* #${newOrder.id}`,
+        `*Sede:* ${branch.name}`,
+        `----------------------------------`,
+        `👤 *Cliente:* ${name}`,
+        `📞 *Teléfono:* ${phone}`,
+        `🛵 *Modalidad:* ${deliveryMode}`,
+        ...(deliveryMode === "Entrega a domicilio" ? [`📍 *Dirección:* ${address}`] : []),
+        `💳 *Método de Pago:* ${newOrder.paymentMethod}`,
+        ...(receiptCheck ? [`📎 *Comprobante:* Adjuntaré el comprobante por este chat.`] : []),
+        ...(notes ? [`📝 *Observaciones:* ${notes}`] : []),
+        `----------------------------------`,
+        `📋 *DETALLE DEL PEDIDO:*`
+      ];
+
+      cart.forEach(item => {
+        const exSum = (item.extras || []).reduce((a, e) => a + (Number(e.price) || 0), 0);
+        const line = (Number(item.unitPrice) + exSum) * item.qty;
+        lines.push(`• *${item.qty}x ${item.name}* ${item.sizeLabel ? `(${item.sizeLabel})` : ''} = ${formatCOP(line)}`);
+        if (item.extras && item.extras.length > 0) {
+          lines.push(`   _Adicionales: ${item.extras.map(e => e.name).join(", ")}_`);
+        }
+        if (item.notes) {
+          lines.push(`   _Nota cocina: ${item.notes}_`);
+        }
+      });
+
+      lines.push(`----------------------------------`);
+      lines.push(`💵 *Subtotal:* ${formatCOP(subtotal)}`);
+      if (deliveryMode === "Entrega a domicilio") {
+        lines.push(`🛵 *Envío:* ${deliveryFee > 0 ? formatCOP(deliveryFee) : 'Por confirmar según sector'}`);
+      }
+      lines.push(`💰 *TOTAL A PAGAR: ${formatCOP(total)}*`);
+
+      const waUrl = `https://wa.me/${branch.whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`;
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+
+      clearCart();
+      closeOrderSummaryPreview();
+      toggleCartModal(false);
+      showToast("Recuerda pulsar 'Enviar' en WhatsApp para completar tu pedido");
+    }
+
+    function openDirectWhatsApp() {
+      const branch = appState.branches[selectedBranch];
+      const msg = `Hola GUERREROS (${branch.name}), quiero hacer una consulta sobre el menú.`;
+      window.open(`https://wa.me/${branch.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+    }
+
+    /********************************************************************
+     * 8. FUNCIONES DEL PANEL ADMINISTRATIVO (1234) EN TIEMPO REAL
+     ********************************************************************/
+    function renderAdminAll() {
+      renderAdminSalesDashboard();
+      renderAdminProductsSection();
+      renderAdminExtrasAndPromos();
+      renderAdminBranchesAndPayments();
+      document.getElementById("firebaseDbUrlInput").value = getFirebaseDbUrl();
+    }
+
+    // --- 8.1 CONTROL DE VENTAS DEL DÍA (12:00 PM a 11:00 PM, EXCEPTO JUEVES) ---
+    function renderAdminSalesDashboard() {
+      const now = new Date();
+      const todayStr = now.toDateString();
+
+      // Poblar selector rápido POS
+      const posSelect = document.getElementById("posProductSelect");
+      posSelect.innerHTML = appState.products.map(p => `<option value="${p.id}">${escapeHtml(p.name)} (${formatCOP(p.price)})</option>`).join("");
+
+      const ordersToday = (appState.orders || []).filter(o => {
+        const d = new Date(o.createdAt);
+        return d.toDateString() === todayStr && o.status !== "Cancelado";
+      });
+
+      const totalToday = ordersToday.reduce((acc, o) => acc + (Number(o.total) || 0), 0);
+      const totalLaGrita = ordersToday.filter(o => o.branchId === "lagrita").reduce((acc, o) => acc + (Number(o.total) || 0), 0);
+      const totalSanCristobal = ordersToday.filter(o => o.branchId === "sancristobal").reduce((acc, o) => acc + (Number(o.total) || 0), 0);
+
+      document.getElementById("adminSalesTotalToday").textContent = formatCOP(totalToday);
+      document.getElementById("adminOrdersCountToday").textContent = String(ordersToday.length);
+      document.getElementById("adminSalesLaGrita").textContent = formatCOP(totalLaGrita);
+      document.getElementById("adminSalesSanCristobal").textContent = formatCOP(totalSanCristobal);
+
+      const tableContainer = document.getElementById("adminOrdersTableContainer");
+      if (!appState.orders || appState.orders.length === 0) {
+        tableContainer.innerHTML = `<div class="text-xs text-white/50 py-6 text-center">Aún no se han registrado pedidos hoy. Los pedidos web y de caja aparecerán aquí en tiempo real.</div>`;
+        return;
+      }
+
+      tableContainer.innerHTML = `
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-guerrero-border text-guerrero-yellow uppercase">
+              <th class="py-2.5 px-2">Hora / ID</th>
+              <th class="py-2.5 px-2">Sede</th>
+              <th class="py-2.5 px-2">Cliente</th>
+              <th class="py-2.5 px-2">Detalle</th>
+              <th class="py-2.5 px-2">Pago</th>
+              <th class="py-2.5 px-2">Total COP</th>
+              <th class="py-2.5 px-2">Estado</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5">
+            ${appState.orders.map(o => {
+              const timeStr = new Date(o.createdAt).toLocaleTimeString("es-VE", { hour: "2-digit", minute: "2-digit" });
+              return `
+                <tr>
+                  <td class="py-2.5 px-2 font-bold">${escapeHtml(o.id)}<span class="block text-[10px] text-white/50">${timeStr}</span></td>
+                  <td class="py-2.5 px-2">${escapeHtml(o.branchName)}</td>
+                  <td class="py-2.5 px-2">${escapeHtml(o.customerName)}<span class="block text-[10px] text-white/50">${escapeHtml(o.customerPhone || '')}</span></td>
+                  <td class="py-2.5 px-2 max-w-xs">${(o.items || []).map(i => `${i.qty}x ${escapeHtml(i.name)}`).join(", ")}</td>
+                  <td class="py-2.5 px-2">${escapeHtml(o.paymentMethod || '')}</td>
+                  <td class="py-2.5 px-2 font-extrabold text-guerrero-yellow">${formatCOP(o.total)}</td>
+                  <td class="py-2.5 px-2">
+                    <select onchange="updateOrderStatus('${o.id}', this.value)" class="bg-black border border-guerrero-border rounded-lg px-2 py-1 text-xs font-bold">
+                      ${["Recibido", "En preparación", "Listo", "Entregado", "Cancelado"].map(st => `
+                        <option value="${st}" ${o.status === st ? 'selected' : ''}>${st}</option>
+                      `).join("")}
+                    </select>
+                  </td>
+                </tr>
+              `;
+            }).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function registerManualPosSale() {
+      const cust = document.getElementById("posCustomerName").value.trim() || "Venta en Caja";
+      const branchId = document.getElementById("posBranch").value;
+      const prodId = document.getElementById("posProductSelect").value;
+      const customAmt = Number(document.getElementById("posCustomAmount").value);
+
+      const prod = appState.products.find(p => p.id === prodId);
+      const amount = customAmt > 0 ? customAmt : (prod ? Number(prod.price) : 0);
+      if (amount <= 0) {
+        showToast("Indica un monto válido en COP");
+        return;
+      }
+
+      const branch = appState.branches[branchId];
+      appState.orders.unshift({
+        id: "POS-" + Date.now().toString().slice(-5),
+        createdAt: new Date().toISOString(),
+        branchId,
+        branchName: branch.name,
+        customerName: cust,
+        customerPhone: "Local",
+        deliveryMode: "Consumo en el local",
+        paymentMethod: "Caja Directa",
+        items: [{ name: prod ? prod.name : "Venta directa", qty: 1, unitPrice: amount }],
+        subtotal: amount,
+        deliveryFee: 0,
+        total: amount,
+        status: "Entregado"
+      });
+
+      document.getElementById("posCustomerName").value = "";
+      document.getElementById("posCustomAmount").value = "";
+      persistAndBroadcastState("Venta registrada en tiempo real");
+    }
+
+    function updateOrderStatus(orderId, newStatus) {
+      const ord = appState.orders.find(o => o.id === orderId);
+      if (!ord) return;
+      ord.status = newStatus;
+      persistAndBroadcastState(`Pedido ${orderId}: ${newStatus}`);
+    }
+
+    function exportDailySalesCSV() {
+      const rows = [["ID", "Fecha", "Sede", "Cliente", "Modalidad", "Pago", "Total COP", "Estado"]];
+      (appState.orders || []).forEach(o => {
+        rows.push([o.id, o.createdAt, o.branchName, o.customerName, o.deliveryMode, o.paymentMethod, o.total, o.status]);
+      });
+      const csv = rows.map(r => r.map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(",")).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `ventas_guerreros_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+    }
+
+    // --- 8.2 GESTIÓN DE PRODUCTOS Y PRECIOS EN TIEMPO REAL ---
+    function renderAdminProductsSection() {
+      const catSelect = document.getElementById("editProdCat");
+      catSelect.innerHTML = appState.categories.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+      renderAdminProductsList();
+    }
+
+    function renderAdminProductsList() {
+      const filter = (document.getElementById("adminMenuFilter").value || "").toLowerCase().trim();
+      const container = document.getElementById("adminProductsList");
+
+      const list = appState.products.filter(p => !filter || p.name.toLowerCase().includes(filter) || p.category.toLowerCase().includes(filter));
+
+      container.innerHTML = list.map(p => `
+        <div class="bg-black border border-guerrero-border rounded-xl p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-3">
+            <img src="${escapeHtml(p.img || '')}" alt="" class="w-12 h-12 rounded-lg object-cover bg-guerrero-card" />
+            <div>
+              <span class="text-[10px] text-guerrero-yellow font-bold uppercase">${escapeHtml(p.category)}</span>
+              <h4 class="font-bold text-white text-sm">${escapeHtml(p.name)}</h4>
+              <p class="text-white/50 text-[11px]">${escapeHtml(p.desc || '')}</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="flex items-center gap-1 bg-guerrero-card border border-guerrero-border rounded-lg px-2 py-1">
+              <span class="text-white/50">$</span>
+              <input
+                type="number"
+                value="${p.price || 0}"
+                onchange="quickUpdateProductPrice('${p.id}', this.value)"
+                class="w-24 bg-transparent text-guerrero-yellow font-extrabold focus:outline-none"
+              />
+              <span class="text-white/50">COP</span>
+            </div>
+
+            <button onclick="toggleProductAvailability('${p.id}')" class="px-3 py-1.5 rounded-lg font-bold ${p.available ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'}">
+              ${p.available ? 'Disponible' : 'Agotado'}
+            </button>
+
+            <button onclick="loadProductIntoForm('${p.id}')" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg font-bold">
+              Editar
+            </button>
+
+            <button onclick="deleteAdminProduct('${p.id}')" class="bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white px-3 py-1.5 rounded-lg font-bold">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function quickUpdateProductPrice(prodId, newPrice) {
+      const prod = appState.products.find(p => p.id === prodId);
+      if (!prod) return;
+      prod.price = Number(newPrice) || 0;
+      persistAndBroadcastState(`Precio de ${prod.name} actualizado a ${formatCOP(prod.price)}`);
+    }
+
+    function toggleProductAvailability(prodId) {
+      const prod = appState.products.find(p => p.id === prodId);
+      if (!prod) return;
+      prod.available = !prod.available;
+      persistAndBroadcastState(`${prod.name}: ${prod.available ? 'Disponible' : 'Marcado como Agotado'}`);
+    }
+
+    function loadProductIntoForm(prodId) {
+      const prod = appState.products.find(p => p.id === prodId);
+      if (!prod) return;
+      document.getElementById("editProdId").value = prod.id;
+      document.getElementById("editProdName").value = prod.name;
+      document.getElementById("editProdCat").value = prod.category;
+      document.getElementById("editProdPrice").value = prod.price || 0;
+      document.getElementById("editProdDesc").value = prod.desc || "";
+      document.getElementById("editProdScope").value = prod.scope || "all";
+      document.getElementById("editProdImg").value = prod.img || "";
+      document.getElementById("editProdSizes").value = (prod.sizes || []).map(s => `${s.label}:${s.price}`).join(", ");
+      document.getElementById("adminProductFormTitle").textContent = "EDITANDO: " + prod.name;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function resetAdminProductForm() {
+      document.getElementById("editProdId").value = "";
+      document.getElementById("editProdName").value = "";
+      document.getElementById("editProdPrice").value = "";
+      document.getElementById("editProdDesc").value = "";
+      document.getElementById("editProdSizes").value = "";
+      document.getElementById("editProdImg").value = "";
+      document.getElementById("adminProductFormTitle").textContent = "AGREGAR O EDITAR PRODUCTO EN TIEMPO REAL";
+    }
+
+    function saveAdminProduct() {
+      const id = document.getElementById("editProdId").value;
+      const name = document.getElementById("editProdName").value.trim();
+      const category = document.getElementById("editProdCat").value;
+      const price = Number(document.getElementById("editProdPrice").value) || 0;
+      const desc = document.getElementById("editProdDesc").value.trim();
+      const scope = document.getElementById("editProdScope").value;
+      const img = document.getElementById("editProdImg").value.trim();
+      const sizesRaw = document.getElementById("editProdSizes").value.trim();
+
+      if (!name) {
+        showToast("El nombre del producto es obligatorio");
+        return;
+      }
+
+      let sizes = [];
+      if (sizesRaw) {
+        sizes = sizesRaw.split(",").map(pair => {
+          const [label, val] = pair.split(":");
+          return { label: (label || "").trim(), price: Number(val) || 0 };
+        }).filter(s => s.label && s.price > 0);
+      }
+
+      if (id) {
+        const existing = appState.products.find(p => p.id === id);
+        if (existing) {
+          existing.name = name;
+          existing.category = category;
+          existing.price = price;
+          existing.desc = desc;
+          existing.scope = scope;
+          if (img) existing.img = img;
+          existing.sizes = sizes.length > 0 ? sizes : undefined;
+        }
+      } else {
+        appState.products.unshift({
+          id: "prod_" + Date.now(),
+          name,
+          category,
+          price,
+          desc,
+          scope,
+          img: img || "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80",
+          sizes: sizes.length > 0 ? sizes : undefined,
+          available: true,
+          published: true
+        });
+      }
+
+      resetAdminProductForm();
+      persistAndBroadcastState("Catálogo actualizado en tiempo real");
+    }
+
+    function deleteAdminProduct(prodId) {
+      appState.products = appState.products.filter(p => p.id !== prodId);
+      persistAndBroadcastState("Producto eliminado en tiempo real");
+    }
+
+    function handleAdminImageUpload(event, targetInputId) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        document.getElementById(targetInputId).value = e.target.result;
+        showToast("Imagen cargada lista para guardar");
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // --- 8.3 ADICIONALES, TASAS Y PROMOCIONES ---
+    function renderAdminExtrasAndPromos() {
+      document.getElementById("adminRateCopUsd").value = appState.rates?.copPerUsd || "";
+      document.getElementById("adminRateVesUsd").value = appState.rates?.vesPerUsd || "";
+
+      const promosList = document.getElementById("adminPromosList");
+      promosList.innerHTML = (appState.promotions || []).map(p => `
+        <div class="bg-black border border-guerrero-border rounded-xl p-3 flex items-center justify-between text-xs">
+          <div>
+            <strong class="text-guerrero-yellow">${escapeHtml(p.title)}</strong> — ${formatCOP(p.price)}
+            <p class="text-white/60">${escapeHtml(p.description)}</p>
+          </div>
+          <button onclick="deleteAdminPromo('${p.id}')" class="text-red-400 hover:underline font-bold">Eliminar</button>
+        </div>
+      `).join("");
+
+      const extrasList = document.getElementById("adminExtrasList");
+      extrasList.innerHTML = (appState.extras || []).map(ext => `
+        <div class="bg-black border border-guerrero-border rounded-xl p-3 flex items-center justify-between gap-2 text-xs">
+          <span class="font-bold text-white">${escapeHtml(ext.name)}</span>
+          <div class="flex items-center gap-1">
+            <input
+              type="number"
+              value="${ext.price || 0}"
+              onchange="updateAdminExtraPrice('${ext.id}', this.value)"
+              class="w-24 bg-guerrero-card border border-guerrero-border rounded-lg px-2 py-1 text-guerrero-yellow font-bold"
+            />
+            <button onclick="deleteAdminExtra('${ext.id}')" class="text-red-400 px-1.5"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function saveAdminRates() {
+      appState.rates = {
+        copPerUsd: Number(document.getElementById("adminRateCopUsd").value) || 0,
+        vesPerUsd: Number(document.getElementById("adminRateVesUsd").value) || 0
+      };
+      persistAndBroadcastState("Tasas actualizadas en tiempo real");
+    }
+
+    function addAdminPromotion() {
+      const title = document.getElementById("promoTitle").value.trim();
+      const description = document.getElementById("promoDesc").value.trim();
+      const price = Number(document.getElementById("promoPrice").value) || 0;
+      if (!title || price <= 0) {
+        showToast("Ingresa título y precio en COP para la promoción");
+        return;
+      }
+      appState.promotions.unshift({
+        id: "promo_" + Date.now(),
+        title,
+        description,
+        price,
+        badge: "PROMO EN VIVO"
+      });
+      document.getElementById("promoTitle").value = "";
+      document.getElementById("promoDesc").value = "";
+      document.getElementById("promoPrice").value = "";
+      persistAndBroadcastState("Promoción publicada en tiempo real");
+    }
+
+    function deleteAdminPromo(promoId) {
+      appState.promotions = appState.promotions.filter(p => p.id !== promoId);
+      persistAndBroadcastState("Promoción eliminada");
+    }
+
+    function addAdminExtra() {
+      const name = document.getElementById("newExtraName").value.trim();
+      const price = Number(document.getElementById("newExtraPrice").value) || 0;
+      if (!name) return;
+      appState.extras.push({ id: "ext_" + Date.now(), name, price, confirmed: price > 0 });
+      document.getElementById("newExtraName").value = "";
+      document.getElementById("newExtraPrice").value = "";
+      persistAndBroadcastState("Adicional agregado");
+    }
+
+    function updateAdminExtraPrice(extId, newPrice) {
+      const ext = appState.extras.find(e => e.id === extId);
+      if (!ext) return;
+      ext.price = Number(newPrice) || 0;
+      persistAndBroadcastState(`Precio de adicional ${ext.name} actualizado`);
+    }
+
+    function deleteAdminExtra(extId) {
+      appState.extras = appState.extras.filter(e => e.id !== extId);
+      persistAndBroadcastState("Adicional eliminado");
+    }
+
+    // --- 8.4 SEDES, HORARIOS Y PAGOS ---
+    function renderAdminBranchesAndPayments() {
+      document.getElementById("adminOpenHour").value = appState.schedule.openHour;
+      document.getElementById("adminCloseHour").value = appState.schedule.closeHour;
+      document.getElementById("adminClosedDay").value = String(appState.schedule.closedDay);
+
+      const branchesEditor = document.getElementById("adminBranchesEditor");
+      branchesEditor.innerHTML = Object.values(appState.branches).map(b => `
+        <div class="bg-black border border-guerrero-border rounded-xl p-4 space-y-2.5 text-xs">
+          <h4 class="font-display text-2xl text-guerrero-yellow">${escapeHtml(b.name)}</h4>
+          <div>
+            <label class="text-white/60 block">Dirección</label>
+            <input type="text" value="${escapeHtml(b.address)}" onchange="updateBranchField('${b.id}', 'address', this.value)" class="w-full bg-guerrero-card border border-guerrero-border rounded-lg px-3 py-1.5 text-white" />
+          </div>
+          <div>
+            <label class="text-white/60 block">WhatsApp (Formato 58424...)</label>
+            <input type="text" value="${escapeHtml(b.whatsapp)}" onchange="updateBranchField('${b.id}', 'whatsapp', this.value)" class="w-full bg-guerrero-card border border-guerrero-border rounded-lg px-3 py-1.5 text-white" />
+          </div>
+          <div>
+            <label class="text-white/60 block">Costo de Envío a Domicilio (COP)</label>
+            <input type="number" value="${b.deliveryFee || 0}" onchange="updateBranchField('${b.id}', 'deliveryFee', Number(this.value))" class="w-full bg-guerrero-card border border-guerrero-border rounded-lg px-3 py-1.5 text-guerrero-yellow font-bold" />
+          </div>
+        </div>
+      `).join("");
+
+      const paymentsEditor = document.getElementById("adminPaymentsEditor");
+      paymentsEditor.innerHTML = (appState.paymentMethods || []).map(m => `
+        <div class="bg-black border border-guerrero-border rounded-xl p-4 space-y-2.5 text-xs">
+          <div class="flex items-center justify-between">
+            <strong class="text-white text-sm">${escapeHtml(m.name)} (${escapeHtml(m.platform)})</strong>
+            <button onclick="togglePaymentMethodActive('${m.id}')" class="px-2.5 py-1 rounded-lg font-bold ${m.active ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'}">
+              ${m.active ? 'Activo' : 'Inactivo'}
+            </button>
+          </div>
+          <div>
+            <label class="text-white/60 block mb-1">Subir Código QR Original Verificado (Opcional)</label>
+            <input type="file" accept="image/*" onchange="uploadPaymentQr(event, '${m.id}')" class="w-full text-[11px] text-white/70 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:bg-guerrero-yellow file:text-black file:font-bold" />
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function saveAdminSchedule() {
+      appState.schedule.openHour = Number(document.getElementById("adminOpenHour").value) || 12;
+      appState.schedule.closeHour = Number(document.getElementById("adminCloseHour").value) || 23;
+      appState.schedule.closedDay = Number(document.getElementById("adminClosedDay").value);
+      persistAndBroadcastState("Horario laboral actualizado en tiempo real");
+    }
+
+    function handleLogoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        appState.brand.logoUrl = e.target.result;
+        persistAndBroadcastState("Logo oficial actualizado en tiempo real");
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function updateBranchField(branchId, field, value) {
+      if (!appState.branches[branchId]) return;
+      appState.branches[branchId][field] = value;
+      persistAndBroadcastState(`Sede ${appState.branches[branchId].name} actualizada`);
+    }
+
+    function togglePaymentMethodActive(pmId) {
+      const pm = appState.paymentMethods.find(x => x.id === pmId);
+      if (!pm) return;
+      pm.active = !pm.active;
+      persistAndBroadcastState(`Método de pago ${pm.name}: ${pm.active ? 'Activado' : 'Desactivado'}`);
+    }
+
+    function uploadPaymentQr(event, pmId) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const pm = appState.paymentMethods.find(x => x.id === pmId);
+        if (pm) {
+          pm.qrImage = e.target.result;
+          persistAndBroadcastState(`Código QR de ${pm.name} actualizado`);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    /********************************************************************
+     * 9. UTILIDADES Y ARRANQUE INICIAL
+     ********************************************************************/
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById("toastNotification");
+      document.getElementById("toastMessage").textContent = msg;
+      toast.classList.remove("hidden");
+      toast.classList.add("flex");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add("hidden");
+        toast.classList.remove("flex");
+      }, 3200);
+    }
+
+    // Inicialización al cargar el DOM
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("currentYear").textContent = new Date().getFullYear();
+      initRealtimeSynchronization();
+      renderAll();
+      setInterval(checkBusinessHours, 60000);
+    });
+  </script>
+</body>
+</html>
