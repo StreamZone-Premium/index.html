@@ -1138,6 +1138,32 @@
           instructions: "Envía mediante Binance Pay usando el ID o correo oficial y adjunta el comprobante."
         },
         {
+        id: "pm_efectivo",
+        name: "Efectivo",
+        platform: "Pesos (COP) / Dólares (USD) / Bs",
+        icon: "fa-money-bill-wave",
+        active: true,
+        qrImage: "",
+        fields: [
+          { label: "Modalidad", value: "Pago al recibir o en sede" },
+          { label: "Monedas", value: "Pesos Colombianos (COP), Dólares (USD) o Bolívares" }
+        ],
+        instructions: "Indica en las notas del pedido con qué moneda y billete vas a pagar por si necesitas vuelto."
+      },
+      {
+        id: "pm_cashea",
+        name: "Cashea",
+        platform: "Inicial + Cuotas sin interés",
+        icon: "fa-credit-card",
+        active: true,
+        qrImage: "",
+        fields: [
+          { label: "Modalidad", value: "Pago de inicial + Cuotas en la App" },
+          { label: "Validación", value: "Coordina la inicial por WhatsApp o escanea el QR en sede" }
+        ],
+        instructions: "Envía tu pedido por WhatsApp para validar tu compra con Cashea y coordinar el pago de la inicial."
+      },
+        {
           id: "pm_bancolombia",
           name: "Bancolombia",
           platform: "Cuenta de Ahorros (COP)",
